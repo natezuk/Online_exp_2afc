@@ -24,7 +24,54 @@
 // Uniform sampling of s2|s1 in the range of dfrange (copied the matlab code) 
 // Range 
 
-function sampleUniform(range,smtrange,numSamples) {
+function sampleUniform(range,dfrange,numSamples) {
+	//----------------- sampling s1 --------------
+		var logrange = [Math.log(range[0]),Math.log(range[1])];
+		var logdfrange = [Math.log(dfrange[0]),Math.log(dfrange[1])];
+		var df = Math.random()*(logdfrange[1]-logdfrange[0])+logdfrange[0];
+		//var df = (logdfrange[1]-logdfrange[0])+logdfrange[0];
+		var f1 = Math.random()*(logrange[1]-logrange[0])+logrange[0];	
+		
+		if (numSamples == 2){
+			var f2;	
+			if (Math.random()>0.5) {
+				f2 = f1 + df;
+			}else {
+				f2 = f1 - df;
+			}
+		
+			
+			while (f2>logrange[1] || f2<logrange[0]){
+				var f1 = Math.random()*(logrange[1]-logrange[0])+logrange[0];	
+						
+				if (Math.random()>0.5) {
+					f2 = f1 + df;
+				}else {
+					f2 = f1 - df;
+				}
+			}
+	
+		//----------------- deciding who is s1 and who is s2 --------------
+			if (Math.random()>0.5) {
+				t1 = Math.round(Math.exp(f1));
+				t2 = Math.round(Math.exp(f2));
+			} else {
+				t2 = Math.round(Math.exp(f1));
+				t1 = Math.round(Math.exp(f2));
+			}
+				
+			return [t1,t2];
+		}
+		else {
+			t1 = Math.round(Math.exp(f1));
+			return t1;
+		}
+	}
+
+// This samples tone frequencies, but based on log2 of the values and using a semitone range
+// (it cannot be reapplied to other trial parameters, like durations or ISI)
+
+function sampleToneFreqs(range,smtrange,numSamples) {
 //----------------- sampling s1 --------------
 	var logrange = [Math.log2(range[0]),Math.log2(range[1])];
 	//var logdfrange = [Math.log(dfrange[0]),Math.log(dfrange[1])];
@@ -41,31 +88,10 @@ function sampleUniform(range,smtrange,numSamples) {
 			f2 = f1 - dsmt/12;
 		}
 	
-		/// This forces the second tone to also be in the restricted range??
-		//while (f2>logrange[1] || f2<logrange[0]){
-		//	var f1 = Math.random()*(logrange[1]-logrange[0])+logrange[0];	
-					
-		//	if (Math.random()>0.5) {
-		//		f2 = f1 + df;
-		//	}else {
-		//		f2 = f1 - df;
-		//	}
-		//}
-
-	//----------------- deciding who is s1 and who is s2 --------------
-	/// Always make f1 first
-		// if (Math.random()>0.5) {
-		// 	t1 = Math.round(Math.exp(f1));
-		// 	t2 = Math.round(Math.exp(f2));
-		// } else {
-		// 	t2 = Math.round(Math.exp(f1));
-		// 	t1 = Math.round(Math.exp(f2));
-		// }
-	
 		// Double the resulting frequency, then round.
 		// Tone wavs are named for 2x the actual frequency
-		t1 = Math.round((2 ^ f1)*2);
-		t2 = Math.round((2 ^ f2)*2);
+		t1 = Math.round((2 ** f1)*2);
+		t2 = Math.round((2 ** f2)*2);
 		return [t1,t2];
 	}
 	else {

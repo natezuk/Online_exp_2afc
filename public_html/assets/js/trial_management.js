@@ -137,7 +137,9 @@ function startTask(){
 		setTimeout(function () {s1[tone1[trial-1]].currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
 		// -----play second tone ------
 		setTimeout(function () {s2[tone2[trial-1]].play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
-		callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
+		//callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
+		// Provide feedback after each trial
+		callTimeoutTraining(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
 	}
 }
 

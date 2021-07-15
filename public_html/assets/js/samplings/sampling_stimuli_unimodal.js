@@ -19,7 +19,8 @@ var ISI = [];
 // ===================================
 function loadTrainingTones(range){
 	for (var jj=0;jj<50;jj++){ // looping number of total presentations		
-				tones = sampleUniform(range,[1.2,1.2],2); 
+				//tones = sampleUniform(range,[1.2,1.2],2); 
+				tones = sampleToneFreqs(range,[3,3],2);
 					tone1Training[jj] = tones[0];
 					tone2Training[jj]= tones[1];
 	}
@@ -35,9 +36,9 @@ function loadTrainingTones(range){
 // ==================================
 function loadTones(range,drange,nTrials){
 	for (var jj=0;jj<nTrials;jj++){ // looping number of total presentations
-			tones = sampleUniform(range,drange,2); 
+			tones = sampleToneFreqs(range,drange,2); 
 				tone1[jj] = tones[0];
-				tone2[jj]= tones[1];
+				tone2[jj] = tones[1];
 	}
 }
 

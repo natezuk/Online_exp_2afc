@@ -11,7 +11,7 @@ var fails=0;
 //var ii;
 
 
-var mode1 = [300,10200];
+var mode1 = [800,3200];
 var numToLoad = mode1[1] - mode1[0];
 // ===============================
 // ******* Preloading ******* 
@@ -19,7 +19,8 @@ var numToLoad = mode1[1] - mode1[0];
 function preLoading() { 
 		for (var ii=mode1[0];ii<mode1[1];ii++){ // looping number of total presentations
 			//name1='//127.0.0.1/wav/'+ii+'_1.wav';
-			name1='http://54.68.5.226/globalAssets/wav/'+ii+'_1.wav';
+			//name1='http://54.68.5.226/globalAssets/wav/'+ii+'_1.wav';
+			name1='http://localhost/tones/'+ii+'.wav';
 
 			s1[ii]= new Audio(name1);
 			s1[ii].addEventListener('canplaythrough', isPreLoad); 

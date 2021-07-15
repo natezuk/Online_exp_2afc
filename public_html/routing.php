@@ -79,7 +79,7 @@ if(isset($_SERVER['REQUEST_URI']))
         $title   = "data_collector";    
         $content = 'insert_data.php';
     }
-	    elseif($path ==******)
+	    elseif($path == "db_admin") /// This just had stars, need to change, but not sure if this is right...
     {
         $title   = "data";    
         $content = 'db_admin.php';
