@@ -13,12 +13,14 @@
 </div>
 <input type="button" id="next1" class = "passButtons" value="Next"  />
 
+<!-- Sound level test -->
+
 
 <!-- inst1 -->
 <div id="inst1" class="inst">
 <p><strong>In our lab we study auditory perception. You are now going to participate in the key task of our lab!!</strong></p>
-<p>In this experiment I will play two tones (beeps) on each trial/question</p>
-<p>Then I will ask you which of the two is higher in pitch and which is lower</p>
+<p>In this experiment you will hear two tones (beeps) on each trial/question.</p>
+<p>Your task is to respond if the pitch from the first to the second tone increases or decreases.</p>
 </div>
 <input type="button" id="next2" class = "passButtons" value="Next"  />
 
@@ -26,8 +28,8 @@
 <div id="demo" class="inst">
 <p>What do I mean by "high" and "low" pitch? </p>
  <p>Lets get a feeling of "higher" and "lower" tones by pressing on these squares</p>
- <p>The tones <strong>increase</strong> in pitch from left to right - try it! :)</p>
- <p>Got it? great - press next</p>
+ <p>The tones <strong>increase</strong> in pitch from left to right - try it!</p>
+ <p>Got it? Great - press next</p>
 </div>
 <!-- demo buttons-->
 <input type="button" id="Dbutton1" class = "Dbuttons" name = "button1" value=""  />
@@ -41,7 +43,7 @@
 <!-- inst2 -->
 <div id="inst2" class="inst">
 <p>The task:</p>
-<p>On each trial (question), two tones will be played consecutively: tone 1 --> tone 2</p>
+<p>On each trial, two tones will be played consecutively: tone 1 --> tone 2</p>
 <p>Then I ask: which of the two tones had the higher pitch? </p>
 <p><strong>If the first tone had a higher pitch - press 1, otherwise press 2</strong></p>
 <p>We will begin with a short training session.</p>

@@ -11,7 +11,7 @@ var fails=0;
 //var ii;
 
 
-var mode1 = [500,2000];
+var mode1 = [300,10200];
 var numToLoad = mode1[1] - mode1[0];
 // ===============================
 // ******* Preloading ******* 

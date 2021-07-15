@@ -53,14 +53,17 @@ document.getElementById('next2').onclick = function (){
 document.getElementById('next4').onclick = function() {
 	$('#inst2').hide();$('#next4').hide();
 	// ================= Sampling initialization===================
-loadTrainingTones([700,1550]);
-loadOnsets([500,500],nTrials); //500
-loadDurations([220,220],nTrials); //220
-loadISIs([800,800],nTrials); //800
-// ==================================================
+	//loadTrainingTones([700,1550]);
+	loadTrainingTones([400,1600]);
+	loadOnsets([500,500],nTrainingTrials); //500
+	//loadDurations([220,220],nTrials); //220
+	loadDurations([70,70],nTrainingTrials); // 50 ms tone durations, add 20 ms?
+	loadISIs([750,750],nTrainingTrials); //800
+	// ==================================================
 	startTaskTraining();
-
 } 
+
+/// Calculate the just noticeable difference 
 
 // ============================
 // ******* Click next5 --> Task block1 ******* 

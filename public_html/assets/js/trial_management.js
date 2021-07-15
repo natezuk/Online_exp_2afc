@@ -8,7 +8,8 @@ var trainCorrect=0;
 // ====================
 // ******* Task! ******* 
 // =====================
-var nTrials = 15; //300
+var nTrials = 80; //300
+var nTrainingTrials = 60;
 var trial=0;
 var block=0;
 var pauseTime=5; //100

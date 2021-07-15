@@ -1,0 +1,12 @@
+# Ignore temporary files
+*~
+
+# Ignore sound files
+*.wav
+
+# Ignore docx files
+*.doc
+*.docx
+
+# Skip sql files
+*.sql
