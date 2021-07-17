@@ -1,11 +1,11 @@
 <?php
 $env = 'local';
 if($env == 'local'){
-		$web_adress = "http://localhost/two_tone_varyisi";
+		$web_adress = "http://localhost:8888/two_tone_varyisi/";
 	// db connection.
 	define('DB_HOST','localhost');//ip:127.0.0.1 
 	define('DB_USER','root'); //USERNAME
-	define('DB_PASS','');
+	define('DB_PASS','root');
 	define('DB_NAME','test_db');
 // }else{
 // 		$web_adress = "http://54.68.5.226/discrimination_2afc/";

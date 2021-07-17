@@ -75,8 +75,10 @@ function sampleToneFreqs(range,smtrange,numSamples) {
 //----------------- sampling s1 --------------
 	var logrange = [Math.log2(range[0]),Math.log2(range[1])];
 	//var logdfrange = [Math.log(dfrange[0]),Math.log(dfrange[1])];
-	/// Change the df calculation to semitones
-	var dsmt = Math.random()*(smtrange[1]-smtrange[0])+smtrange[0];
+	// Randomly select a semitone difference 
+	var dsmt = smtrange[Math.floor( Math.random() * smtrange.length )];
+	//var dsmt = Math.random()*(smtrange[1]-smtrange[0])+smtrange[0];
+
 	//var df = (logdfrange[1]-logdfrange[0])+logdfrange[0];
 	var f1 = Math.random()*(logrange[1]-logrange[0])+logrange[0];	
 	
@@ -95,8 +97,10 @@ function sampleToneFreqs(range,smtrange,numSamples) {
 		return [t1,t2];
 	}
 	else {
-		t1 = Math.round(Math.exp(f1));
-		return t1;
+		//t1 = Math.round(Math.exp(f1));
+		t1 = Math.round((2 ** f1)*2);
+		//return t1;
+		return [t1];
 	}
 }
 
@@ -194,46 +198,75 @@ function shuffle(array) {
 // *******  Initialize adaptivity   ******* 
 // =========================
 function initAdapt() {
-    trig=-1; // signal for reversal
-    reversal=0; // reversals counter
-    step=0.045; // starting step size
-    stepVec=[0.02,0.01,0.005,0.001]; // other step sizes.
+    //trig=-1; // signal for reversal
+    //reversal=0; // reversals counter
+    //step=0.045; // starting step size
+    //stepVec=[0.02,0.01,0.005,0.001]; // other step sizes.
     success=0;
-    R=1.2; // starting ratio
+	var smt_start=2; // starting frequency difference in semitones
+	smt_set=[smt_start]; // set up the semitone ranges to start
+    //R=1.2; // starting ratio
 }
 
 // =========================
 // *******  Perform adaptivity   ******* 
 // =========================
+/// This function does a 3-down 1-up staircase procedure
 function adapt(acc) {
-        if (acc == 1){ // following *correct* answer
-                success++;
-                if (success==3){  //step down
-                    if (trig==0){
-                        reversal++;
-					}
-                    if (R-step<1){
-                        R=1.002;
-					} else {
-                        R=R-step;
-					}
-                    success=0;
-                    trig=1;
-	     		}
-	   } else { // following *incorrect* answer
-                success=0;     //step up
-                if (trig==1) {
-                    reversal++;
-	      		}
-                R=R+step;
-                trig=0;
-	   }
-            
-       if (reversal>0 && (reversal%4)==0 && reversal<20) {
-                step=stepVec[(reversal/4)-1];
-  	   }
+	if (acc == 1){ // following *correct* answer
+		success++;
+		if (success==3){  //step down
+			//if (trig==0){
+			//    reversal++;
+			//}
+			// Divide the semitones by half
+			smt_set.push(smt_set[smt_set.length-1]/2);
+			//if (R-step<1){
+				//R=1.002;
+			//} else {
+				// R=R-step;
+			//}
+			success=0;
+			//trig=1;
+		} else { // if there are < 3 correct responses in a row
+			smt_set.push(smt_set[smt_set.length-1]);
+
+			}
+	} else { // following *incorrect* answer
+		success=0;     //step up
+		//if (trig==1) {
+		//    reversal++;
+		//}
+		//R=R+step;
+		smt_set.push(smt_set[smt_set.length-1]*2); // double the semitone difference
+		//trig=0;
+	}
+		
+	//if (reversal>0 && (reversal%4)==0 && reversal<20) {
+	//         step=stepVec[(reversal/4)-1];
+	//}
 }
 
+// Function to calculate the JND
+function calculate_jnd(smt_set) {
+	/// Find the first reversal
+	var ii = 0;
+	while (smt_set[ii]<=smt_set[ii-1]) {
+		// iterate through each trial as long as smt is <= the previous trial
+		ii++;
+	}
+	var first_reversal = ii;
+
+	/// Calculate the average semitone difference from the first reversal
+	var jnd = 0;
+	for (ii=first_reversal; ii<smt_set.length; ii++) {
+		jnd += smt_set[ii]; // sum the smt together after the first reversal
+	}
+	jnd = jnd/(smt_set.length-first_reversal);
+
+	// Return this value
+	return jnd;
+}
 
 function blockFeedbackAdaptivity(avg) {
 	

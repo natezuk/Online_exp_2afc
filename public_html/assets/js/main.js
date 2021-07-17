@@ -9,10 +9,34 @@ $(document).ready(function(){
 // when JQuary finishes loading, preLoading functions is called from "pre_loads.js", 
 //where all the initial loading preloading of stimuli happens 
 
-$( "#progressbarPre" ).progressbar({value: 0.01});
-$(window).load(function(){
-	preLoading() 
+/// Load only the demo and training data here
 
+//$( "#progressbarPre" ).progressbar({value: 0.01});
+$(window).load(function(){
+	/// Setup conditions for main task
+	// Select tone frequency range
+	// ** This will probably be run when the webpage is first loaded
+	if (Math.random()>0.5) {
+		// high frequency first
+		low_freq_range = [800,200]; // designate the lower frequency of each range
+	} else {
+		low_freq_range = [200,800];
+	}
+
+	// Select constant/random
+	if (Math.random()>0.5) {
+		// select random first
+		cntrnd = [1,0];
+	} else {
+		// select constant
+		cntrnd = [0,1];
+	}
+	// Now load the demo/training stimuli
+	loadTrainingTones([400,1600],nTrainingTrials);
+	preLoadingToneSet(tone1Training.concat(tone2Training,demo_tones))
+
+	// Display the headphones when loading is done
+	$('#next1').show();$('#headphones').show();$('#instHeadphones').show();
 }); 
 
 
@@ -54,7 +78,7 @@ document.getElementById('next4').onclick = function() {
 	$('#inst2').hide();$('#next4').hide();
 	// ================= Sampling initialization===================
 	//loadTrainingTones([700,1550]);
-	loadTrainingTones([400,1600]);
+	// loadTrainingTones([400,1600]);
 	loadOnsets([500,500],nTrainingTrials); //500
 	//loadDurations([220,220],nTrials); //220
 	loadDurations([70,70],nTrainingTrials); // 50 ms tone durations, add 20 ms?
@@ -63,17 +87,71 @@ document.getElementById('next4').onclick = function() {
 	startTaskTraining();
 } 
 
-/// Calculate the just noticeable difference 
+/// Run the adaptive procedure and calculate the just noticeable difference 
+// ====
+// *** Staircase block ***
+// ====
+document.getElementById('nextAdapt').onclick = function() {
+	$('#instAdapt').hide();$('#nextAdapt').hide();
+	// Show loading screen briefly
+	$('#loading').show();
+	/// Start by loading the first tones only
+	loadTones([400,1600],[2],nAdaptTrials,1); 
+		// the [2] for the semitone difference is a place holder since the second tones aren't calculated here
+	loadOnsets([500,500],nAdaptTrials);
+	loadDurations([70,70],nAdaptTrials);
+	loadISIs([750,750],nAdaptTrials);
+	/// Preload the wavs for the first tones
+	preLoadingToneSet(tone1.slice()); // .slice() copies the array and creates a new reference
+		// otherwise tone1 will change in addition the local array in the function
+	/// Start the adaptive task
+	staircaseTask();
+	/// Calculate the semitone differences to use in the main block
+	smt_diff_touse = smt_scalings*JND;
+}
 
 // ============================
 // ******* Click next5 --> Task block1 ******* 
 // ============================
 
-document.getElementById('next5').onclick = function (){
-	$('#next5').hide();$('#inst3').hide();
-// ================= Sampling initialization===================
-loadTones([500,2000],[1.005,1.1],nTrials); // Vincent and Itay
+/// For each block, preload the tones that will be used
 
+document.getElementById('nextMain1').onclick = function (){
+	$('#nextMain1').hide();$('#instMain1').hide();
+// ================= Sampling initialization===================
+	//Show loading screen briefly
+	$('#loading').show();
+	loadTones([low_freq_range[0],low_freq_range[0]*4],smt_diff_touse,nTrials); // Vincent and Itay
+	loadOnsets([500,500],nTrials);
+	loadDurations([70,70],nTrials);
+	if (cntrnd[0]==1) { // random ISIs
+		loadISIs([500,1000],nTrials);
+	} else {
+		loadISIs([750,750],nTrials);
+	}
+	// Load the stimuli for these two blocks
+	preLoadingToneSet(tone1.concat(tone2));
+// ==================================================
+//finish(); // for automatic testing
+	startTask(); 
+}
+
+document.getElementById('nextMain2').onclick = function (){
+	$('#nextMain2').hide();$('#instMain2').hide();
+	// ================= Sampling initialization===================
+	//show loading screen briefly
+	$('#loading').show();
+	//loadTones([500,2000],[1.005,1.1],nTrials); // Vincent and Itay
+	loadTones([low_freq_range[1],low_freq_range[1]*4],smt_diff_touse,nTrials); // Vincent and Itay
+	loadOnsets([500,500],nTrials);
+	loadDurations([70,70],nTrials);
+	if (cntrnd[1]==1) { // random ISIs
+		loadISIs([500,1000],nTrials);
+	} else {
+		loadISIs([750,750],nTrials);
+	}
+	// Load the stimuli for these two blocks
+	preLoadingToneSet(tone1.concat(tone2));
 // ==================================================
 //finish(); // for automatic testing
 	startTask(); 

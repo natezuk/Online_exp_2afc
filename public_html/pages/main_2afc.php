@@ -50,6 +50,16 @@
 </div>
 <input type="button" id="next4" class = "passButtons" value="Next"  />
 
+<!-- instAdapt -->
+<div id="instAdapt" class="inst">
+<p>Onto the main experiment!</p>
+<p>The starting block has 60 trials that will last ~3 min.</p>
+<p>Your task is the same as before:</p>
+<p><strong>If the first tone had a higher pitch - press 1, otherwise press 2</strong></p>
+<p><strong>Note:</strong> Trials will be harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess</p>
+</div>
+<input type="button" id="nextAdapt" class = "passButtons" value="Next"  />
+
 <!-- inst3 -->
 <!-- <div id="inst3" class="inst">
 <p>Good job, now we can start the real task</p>
@@ -66,17 +76,21 @@
 </div>-->
 
 <!-- inst3 -->
-<div id="inst3" class="inst">
-<p>Good job, now we can start the real task</p>
-<p>The task will last for ~10 minutes, 3 blocks of 50 trials with breaks in between</p>
-<p><strong>Note:</strong> Trials will be much harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess </p>
+<div id="instMain1" class="inst">
+<p>Good job!</p>
+<p>Next is the main task, which consists of 4 blocks of 80 trials each and lasts ~20 minutes.</p>
+<p><strong>Note:</strong> Trials will be harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess </p>
 <p>You can now also use the keyboard keys "1" and "2", the ones on the left of the keyboad (not the numped)<p>
-<p>Lastly - this time there will be  <strong>NO</strong> feedback after each trial, but only after each block</p>
+<!--<p>Lastly - this time there will be  <strong>NO</strong> feedback after each trial, but only after each block</p>-->
 </div>
+<input type="button" id="nextMain1" class="passButtons" value="Next" />
 
-
-
-<input type="button" id="next5" class = "passButtons" value="Next"  />
+<div id="instMain2" class="inst">
+<p>Good job!</p>
+<p>You have two more blocks to go. The trials in these blocks will be a little different.</p>
+<!--<p>Lastly - this time there will be  <strong>NO</strong> feedback after each trial, but only after each block</p>-->
+</div>
+<input type="button" id="nextMain2" class = "passButtons" value="Next" />
 
 
 <!-- inst3 -->
@@ -99,7 +113,7 @@
 <!-- break-->
 <div  id="break" class="inst">
 <p>You finished a block, Good work!</p>
-<p>Before continuing, maybe take a minute or two to freshen up.</p>
+<p>Before continuing, feel free to take a break for a minute or two.</p>
 </div>
 <input type="button" id="continue" class = "passButtons" value="Continue"  />
 
