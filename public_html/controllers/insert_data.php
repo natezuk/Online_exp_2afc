@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['postTone1']) &&  isset($_POST['postTone2']) &&  isset($_POST['postResponse']) &&  isset($_POST['postDuration']) &&  isset($_POST['postOnset']) &&  isset($_POST['postISI']) ) {
+if(isset($_POST['postTone1']) &&  isset($_POST['postTone2']) &&  isset($_POST['postResponse']) &&  isset($_POST['postDuration']) &&  isset($_POST['postOnset']) &&  isset($_POST['postISI']) && isset($_POST['taskID']) ) {
 			
 	$tone1=$_POST['postTone1'];
 	$tone2=$_POST['postTone2'];
@@ -7,6 +7,7 @@ if(isset($_POST['postTone1']) &&  isset($_POST['postTone2']) &&  isset($_POST['p
 	$duration=$_POST['postDuration'];
 	$onset=$_POST['postOnset'];
 	$ISI=$_POST['postISI'];
+	$task_id=$_POST['taskID'];
 	
 	$tone1 = safe_encode($tone1);
 	$tone2 = safe_encode($tone2);
