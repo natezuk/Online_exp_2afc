@@ -6,7 +6,7 @@ require 'admin/functions.php';
 require 'admin/config.php';
 
 $experiment_id = '1';
-$task_id = 0; // setup a task ID, this will be changed for each task in the experiment
+//$task_id = 0; // setup a task ID, this will be changed for each task in the experiment
     // 1 = adaptive task
     // 2 = blocks 1-2 of the main task
     // 3 = blocks 3-4 of the main task

@@ -24,13 +24,16 @@
 // Uniform sampling of s2|s1 in the range of dfrange (copied the matlab code) 
 // Range 
 
+// Change sampleUniform to pick with linear (non-log) sampling (18-7-2021)
 function sampleUniform(range,dfrange,numSamples) {
 	//----------------- sampling s1 --------------
-		var logrange = [Math.log(range[0]),Math.log(range[1])];
-		var logdfrange = [Math.log(dfrange[0]),Math.log(dfrange[1])];
-		var df = Math.random()*(logdfrange[1]-logdfrange[0])+logdfrange[0];
-		//var df = (logdfrange[1]-logdfrange[0])+logdfrange[0];
-		var f1 = Math.random()*(logrange[1]-logrange[0])+logrange[0];	
+		// var logrange = [Math.log(range[0]),Math.log(range[1])];
+		// var logdfrange = [Math.log(dfrange[0]),Math.log(dfrange[1])];
+		// var df = Math.random()*(logdfrange[1]-logdfrange[0])+logdfrange[0];
+		// //var df = (logdfrange[1]-logdfrange[0])+logdfrange[0];
+		// var f1 = Math.random()*(logrange[1]-logrange[0])+logrange[0];	
+		var df = Math.random()*(dfrange[1]-dfrange[0])+dfrange[0];
+		var f1 = Math.random()*(range[1]-range[0])+range[0];
 		
 		if (numSamples == 2){
 			var f2;	
@@ -41,29 +44,32 @@ function sampleUniform(range,dfrange,numSamples) {
 			}
 		
 			
-			while (f2>logrange[1] || f2<logrange[0]){
-				var f1 = Math.random()*(logrange[1]-logrange[0])+logrange[0];	
+			// while (f2>logrange[1] || f2<logrange[0]){
+			// 	var f1 = Math.random()*(logrange[1]-logrange[0])+logrange[0];	
 						
-				if (Math.random()>0.5) {
-					f2 = f1 + df;
-				}else {
-					f2 = f1 - df;
-				}
-			}
+			// 	if (Math.random()>0.5) {
+			// 		f2 = f1 + df;
+			// 	}else {
+			// 		f2 = f1 - df;
+			// 	}
+			// }
 	
 		//----------------- deciding who is s1 and who is s2 --------------
 			if (Math.random()>0.5) {
-				t1 = Math.round(Math.exp(f1));
-				t2 = Math.round(Math.exp(f2));
+				// t1 = Math.round(Math.exp(f1));
+				// t2 = Math.round(Math.exp(f2));
+				t1 = Math.round(f1);
+				t2 = Math.round(f2);
 			} else {
-				t2 = Math.round(Math.exp(f1));
-				t1 = Math.round(Math.exp(f2));
+				t2 = Math.round(f1);
+				t1 = Math.round(f2);
 			}
 				
 			return [t1,t2];
 		}
 		else {
-			t1 = Math.round(Math.exp(f1));
+			//t1 = Math.round(Math.exp(f1));
+			t1 = Math.round(f1);
 			return t1;
 		}
 	}
@@ -274,7 +280,7 @@ function calculate_jnd(smt_set) {
 		jnd_ntr += smt_set[ii];
 	}
 	///jnd_ntr = jnd_ntr/(smt.length-7);
-	jnd_ntr = Math.pow(jnd_ntr,1/(smt.length-7));
+	jnd_ntr = Math.pow(jnd_ntr,1/(smt_set.length-7));
 
 	/// Use the minimum of the two possible values
 	/// (if subjects accidentally make a wrong choice early on, the second option

@@ -18,8 +18,8 @@
 
 <!-- inst1 -->
 <div id="inst1" class="inst">
-<p><strong>In our lab we study auditory perception. You are now going to participate in the key task of our lab!!</strong></p>
-<p>In this experiment you will hear two tones (beeps) on each trial/question.</p>
+<p><strong>In our lab we study auditory perception. You are now going to participate in a key task of our lab!</strong></p>
+<p>In this experiment you will hear two tones (beeps) on each trial.</p>
 <p>Your task is to respond if the pitch from the first to the second tone increases or decreases.</p>
 </div>
 <input type="button" id="next2" class = "passButtons" value="Next"  />
@@ -44,8 +44,8 @@
 <div id="inst2" class="inst">
 <p>The task:</p>
 <p>On each trial, two tones will be played consecutively: tone 1 --> tone 2</p>
-<p>Then I ask: which of the two tones had the higher pitch? </p>
-<p><strong>If the first tone had a higher pitch - press 1, otherwise press 2</strong></p>
+<p>Your task: Which of the two tones had the higher pitch? </p>
+<p><strong>If the first tone had a higher pitch, press 1. Otherwise press 2.</strong></p>
 <p>We will begin with a short training session.</p>
 </div>
 <input type="button" id="next4" class = "passButtons" value="Next"  />
@@ -55,8 +55,8 @@
 <p>Onto the main experiment!</p>
 <p>The starting block has 60 trials that will last ~3 min.</p>
 <p>Your task is the same as before:</p>
-<p><strong>If the first tone had a higher pitch - press 1, otherwise press 2</strong></p>
-<p><strong>Note:</strong> Trials will be harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess</p>
+<p><strong>If the first tone had a higher pitch, press 1. Otherwise press 2.</strong></p>
+<p><strong>Note:</strong> Trials will be harder now, but there is always a correct answer. If you don't know the answer - that's ok, just guess</p>
 </div>
 <input type="button" id="nextAdapt" class = "passButtons" value="Next"  />
 
@@ -78,7 +78,7 @@
 <!-- inst3 -->
 <div id="instMain1" class="inst">
 <p>Good job!</p>
-<p>Next is the main task, which consists of 4 blocks of 80 trials each and lasts ~20 minutes.</p>
+<p>Next is the main task, which consists of 4 blocks of 80 trials each. It will take ~20 minutes in total.</p>
 <!--<p><strong>Note:</strong> Trials will be harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess </p>-->
 <!--<p>You can now also use the keyboard keys "1" and "2", the ones on the left of the keyboad (not the numped)<p>-->
 <!--<p>Lastly - this time there will be  <strong>NO</strong> feedback after each trial, but only after each block</p>-->
@@ -112,7 +112,7 @@
 
 <!-- break-->
 <div  id="break" class="inst">
-<p>You finished a block, Good work!</p>
+<p>You finished a block. Good work!</p>
 <p>Before continuing, feel free to take a break for a minute or two.</p>
 </div>
 <input type="button" id="continue" class = "passButtons" value="Continue"  />
@@ -120,14 +120,14 @@
 <!--<div  id="break2" class="inst">
 <p>One more block to go!</p>
 <p>Before continuing, maybe take a minute or two to freshen up.</p>
-</div>
+</div>-->
 
 <div  id="thanks" class="thanks">
 <p>Thats it!</p>
 <p>Many thanks for participating.</p>
 <p>M-turk password: hello newman.</p>
 <p>You may close this window now.</p>
-</div>-->
+</div>
 
 <p id="blockFeed"> </p>
 <!-- ############### OTHER CLASSES ################ -->

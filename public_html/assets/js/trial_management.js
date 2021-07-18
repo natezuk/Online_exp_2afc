@@ -4,17 +4,18 @@
 var trainingLength=5; //30
 var trainingTrial=0;
 var trainCorrect=0;
+var task_id = 0; // task_id
 
 // ====================
 // ******* Task! ******* 
 // =====================
-var nTrials = 160; //300
+var nTrials = 30; //300 //160
 	// number of trials per 2 blocks
 var nTrainingTrials = 5;
-var nAdaptTrials = 60;
+var nAdaptTrials = 20; //60
 var trial=0;
 var block=0;
-var pauseTime=80; //100
+var pauseTime=15; //100 //80
 	// number of trials before the break (in between blocks)
 var breaks=0;
 
@@ -23,7 +24,7 @@ var response=[];
 var acc = [];
 var JND = 0; // setup JND variable
 var smt_scalings = [0.5,1,1.5,2]; // set of scalings of JND for tone differences in the main block
-var smt_diff_touse = [];
+var smt_diff_touse = new Array();
 var smt_set = [];
 
 var allow=false;
@@ -117,9 +118,12 @@ function startTask(){
 
 // ========================= block over============================
 	if (trial == nTrials){
-		if ($task_id==2) { // if it's the second task, there are 2 more blocks
+		if (task_id==2) { // if it's the second task, there are 2 more blocks
+			// Save the data
+			save_data();
 			$('#instMain2').show();$('#nextMain2').show();$('.textQuestion').hide();
 		} else {
+			save_data();
 			finish(); // show a finish screen for the block
 		}
 // ========================= continue to play tones============================
@@ -208,7 +212,7 @@ function callTimeout(time,trial){
 		}	
 		//pressButton();
 		// Check if it's time for a break
-		if (trial%pauseTime==0) {
+		if (trial%pauseTime==0 && trial<nTrials) {
 			setTimeout(function () {$('.feedback').hide();doBreak();},500);		
 			//doBreak();
 		} else {
@@ -230,7 +234,7 @@ function callTimeout(time,trial){
 		}	
 		//pressButton();
 		// Check if it's time for a break
-		if (trial%pauseTime==0) {
+		if (trial%pauseTime==0 && trial<nTrials) {
 			setTimeout(function () {$('.feedback').hide();doBreak();},500);		
 			//doBreak();
 		} else {
@@ -245,9 +249,15 @@ function staircaseTask(){
 	// Reset the trial to 0
 	//trial = 1;
 	if (trial == nAdaptTrials){
-
+		// Save the data
+		save_data();
 		// Calculate the JND at the end
 		JND = calculate_jnd(smt_set);
+		// Calculate the semitone differences to use in the main block
+		for (var ii = 0; ii<smt_scalings.length; ii++) {
+			smt_diff_touse[ii] = smt_scalings[ii]*JND;
+		}
+
 		$('#instMain1').show();$('#nextMain1').show();$('.textQuestion').hide();
 	} else {
 		trial++;

@@ -51,6 +51,8 @@ function insert_results($array,$userId,$task_id,$connection,$field_id)
         $insert.= "(`result`,`additional_data`,`field_id`,`task_id`,`user_id`,`creation_time`,`modification_time`,`active`) ";
         $insert.= "VALUES ";
 		$insert.= "('{$array}','','{$field_id}','{$task_id}','{$userId}',NOW(),null,1)";
+
+        print_r($task_id);
 		
 		$results = mysqli_query($connection,$insert);        
         if(!$results) return '0';      

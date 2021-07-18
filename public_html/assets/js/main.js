@@ -98,7 +98,7 @@ document.getElementById('nextAdapt').onclick = function() {
 	// Show loading screen briefly
 	$('#loading').show();
 	// Change the task id
-	$task_id = 1;
+	task_id = 1;
 	/// Start by loading the first tones only
 	loadTones([400,1600],[2],nAdaptTrials,1); 
 		// the [2] for the semitone difference is a place holder since the second tones aren't calculated here
@@ -111,13 +111,11 @@ document.getElementById('nextAdapt').onclick = function() {
 	/// Start the adaptive task
 	staircaseTask();
 	// Save the data
-	save_data();
+	//save_data(); // now placed in staircaseTask()
 	// $.post('data_collector', {postTone1: tone1, postTone2: tone2, postResponse: response,
 	// 	postDuration: duration, postOnset: onset, postISI: ISI}, function(data){
 	// 	//console.log(data);	       
    	// });
-	/// Calculate the semitone differences to use in the main block
-	smt_diff_touse = smt_scalings*JND;
 }
 
 // ============================
@@ -132,7 +130,7 @@ document.getElementById('nextMain1').onclick = function (){
 	//Show loading screen briefly
 	$('#loading').show();
 	// Change the task id
-	$task_id = 2;
+	task_id = 2;
 	loadTones([low_freq_range[0],low_freq_range[0]*4],smt_diff_touse,nTrials); // Vincent and Itay
 	loadOnsets([500,500],nTrials);
 	loadDurations([70,70],nTrials);
@@ -147,9 +145,11 @@ document.getElementById('nextMain1').onclick = function (){
 //finish(); // for automatic testing
 	// Reset breaks to 0;
 	breaks = 0;
+	// Reset trial counter
+	trial = 0;
 	startTask(); 
 	// Save the data
-	save_data();
+	//save_data();
 }
 
 document.getElementById('nextMain2').onclick = function (){
@@ -158,7 +158,7 @@ document.getElementById('nextMain2').onclick = function (){
 	//show loading screen briefly
 	$('#loading').show();
 	// Change the task id
-	$task_id = 3;
+	task_id = 3;
 	//loadTones([500,2000],[1.005,1.1],nTrials); // Vincent and Itay
 	loadTones([low_freq_range[1],low_freq_range[1]*4],smt_diff_touse,nTrials); // Vincent and Itay
 	loadOnsets([500,500],nTrials);
@@ -174,6 +174,8 @@ document.getElementById('nextMain2').onclick = function (){
 //finish(); // for automatic testing
 	// Reset breaks to 0
 	breaks = 0;
+	// Reset trial counter
+	trial = 0;
 	startTask(); 
 	// Save data (happens in the 'finish' function)
 	//save_data();
@@ -190,8 +192,9 @@ document.getElementById('nextMain2').onclick = function (){
 // }
 
 function save_data(){
-	$.post('data_collector', {postTone1: tone1, postTone2: tone2, postResponse: response, postDuration: duration, postOnset: onset, postISI: ISI}, function(data){
-		//console.log(data);	       
+	$.post('data_collector', {postTone1: tone1, postTone2: tone2, postResponse: response, 
+		postDuration: duration, postOnset: onset, postISI: ISI, taskID: task_id}, function(data){
+		//console.log($task_id);	       
    	});
 }
 
@@ -202,7 +205,8 @@ function finish(){
 
 	$('#thanks').show()
 	
-	$.post('data_collector', {postTone1: tone1, postTone2: tone2, postResponse: response, postDuration: duration, postOnset: onset, postISI: ISI}, function(data){
-	      //console.log(data);	       
-     });
+	// Removed data saving, placed in startTask instead
+	// $.post('data_collector', {postTone1: tone1, postTone2: tone2, postResponse: response, postDuration: duration, postOnset: onset, postISI: ISI}, function(data){
+	//       //console.log(data);	       
+    //  });
 }
