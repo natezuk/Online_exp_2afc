@@ -79,8 +79,8 @@
 <div id="instMain1" class="inst">
 <p>Good job!</p>
 <p>Next is the main task, which consists of 4 blocks of 80 trials each and lasts ~20 minutes.</p>
-<p><strong>Note:</strong> Trials will be harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess </p>
-<p>You can now also use the keyboard keys "1" and "2", the ones on the left of the keyboad (not the numped)<p>
+<!--<p><strong>Note:</strong> Trials will be harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess </p>-->
+<!--<p>You can now also use the keyboard keys "1" and "2", the ones on the left of the keyboad (not the numped)<p>-->
 <!--<p>Lastly - this time there will be  <strong>NO</strong> feedback after each trial, but only after each block</p>-->
 </div>
 <input type="button" id="nextMain1" class="passButtons" value="Next" />
@@ -117,7 +117,7 @@
 </div>
 <input type="button" id="continue" class = "passButtons" value="Continue"  />
 
-<div  id="break2" class="inst">
+<!--<div  id="break2" class="inst">
 <p>One more block to go!</p>
 <p>Before continuing, maybe take a minute or two to freshen up.</p>
 </div>
@@ -127,7 +127,7 @@
 <p>Many thanks for participating.</p>
 <p>M-turk password: hello newman.</p>
 <p>You may close this window now.</p>
-</div>
+</div>-->
 
 <p id="blockFeed"> </p>
 <!-- ############### OTHER CLASSES ################ -->

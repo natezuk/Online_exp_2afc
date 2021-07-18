@@ -15,12 +15,12 @@ if(isset($_POST['postTone1']) &&  isset($_POST['postTone2']) &&  isset($_POST['p
 	$onset = safe_encode($onset);
 	$ISI = safe_encode($ISI);
 	
-	insert_results($tone1,$userId,$connection,27);
-	insert_results($tone2,$userId,$connection,28);
-	insert_results($response,$userId,$connection,29);
-	insert_results($duration,$userId,$connection,30);
-	insert_results($onset,$userId,$connection,31);
-	insert_results($ISI,$userId,$connection,32);
+	insert_results($tone1,$userId,$task_id,$connection,27);
+	insert_results($tone2,$userId,$task_id,$connection,28);
+	insert_results($response,$userId,$task_id,$connection,29);
+	insert_results($duration,$userId,$task_id,$connection,30);
+	insert_results($onset,$userId,$task_id,$connection,31);
+	insert_results($ISI,$userId,$task_id,$connection,32);
 	
 	update_user_complete($userId,$connection,$experiment_id);
 	

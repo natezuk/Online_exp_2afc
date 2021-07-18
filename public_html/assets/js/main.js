@@ -65,7 +65,7 @@ document.getElementById('next2').onclick = function (){
 // ============================
 // ******* Click next3 --> Instructions ******* 
 // ============================
-	document.getElementById('next3').onclick = function (){
+document.getElementById('next3').onclick = function (){
 	$('#next3').hide();$('.Dbuttons').hide();$('#demo').hide();$('#axis').hide();
 	$('#inst2').show();$('#next4').show();
 	}
@@ -85,6 +85,8 @@ document.getElementById('next4').onclick = function() {
 	loadISIs([750,750],nTrainingTrials); //800
 	// ==================================================
 	startTaskTraining();
+	// Save the data
+	//save_data();
 } 
 
 /// Run the adaptive procedure and calculate the just noticeable difference 
@@ -95,6 +97,8 @@ document.getElementById('nextAdapt').onclick = function() {
 	$('#instAdapt').hide();$('#nextAdapt').hide();
 	// Show loading screen briefly
 	$('#loading').show();
+	// Change the task id
+	$task_id = 1;
 	/// Start by loading the first tones only
 	loadTones([400,1600],[2],nAdaptTrials,1); 
 		// the [2] for the semitone difference is a place holder since the second tones aren't calculated here
@@ -106,6 +110,12 @@ document.getElementById('nextAdapt').onclick = function() {
 		// otherwise tone1 will change in addition the local array in the function
 	/// Start the adaptive task
 	staircaseTask();
+	// Save the data
+	save_data();
+	// $.post('data_collector', {postTone1: tone1, postTone2: tone2, postResponse: response,
+	// 	postDuration: duration, postOnset: onset, postISI: ISI}, function(data){
+	// 	//console.log(data);	       
+   	// });
 	/// Calculate the semitone differences to use in the main block
 	smt_diff_touse = smt_scalings*JND;
 }
@@ -121,6 +131,8 @@ document.getElementById('nextMain1').onclick = function (){
 // ================= Sampling initialization===================
 	//Show loading screen briefly
 	$('#loading').show();
+	// Change the task id
+	$task_id = 2;
 	loadTones([low_freq_range[0],low_freq_range[0]*4],smt_diff_touse,nTrials); // Vincent and Itay
 	loadOnsets([500,500],nTrials);
 	loadDurations([70,70],nTrials);
@@ -133,7 +145,11 @@ document.getElementById('nextMain1').onclick = function (){
 	preLoadingToneSet(tone1.concat(tone2));
 // ==================================================
 //finish(); // for automatic testing
+	// Reset breaks to 0;
+	breaks = 0;
 	startTask(); 
+	// Save the data
+	save_data();
 }
 
 document.getElementById('nextMain2').onclick = function (){
@@ -141,6 +157,8 @@ document.getElementById('nextMain2').onclick = function (){
 	// ================= Sampling initialization===================
 	//show loading screen briefly
 	$('#loading').show();
+	// Change the task id
+	$task_id = 3;
 	//loadTones([500,2000],[1.005,1.1],nTrials); // Vincent and Itay
 	loadTones([low_freq_range[1],low_freq_range[1]*4],smt_diff_touse,nTrials); // Vincent and Itay
 	loadOnsets([500,500],nTrials);
@@ -154,12 +172,28 @@ document.getElementById('nextMain2').onclick = function (){
 	preLoadingToneSet(tone1.concat(tone2));
 // ==================================================
 //finish(); // for automatic testing
+	// Reset breaks to 0
+	breaks = 0;
 	startTask(); 
+	// Save data (happens in the 'finish' function)
+	//save_data();
 }
 
 
 });
 }(jQuery));
+
+// function save_training_data(){
+// 	$.post('data_collector', {postTone1: tone1Training, postTone2: tone2Training, postResponse: response, postDuration: duration, postOnset: onset, postISI: ISI}, function(data){
+// 		//console.log(data);	       
+//    	});
+// }
+
+function save_data(){
+	$.post('data_collector', {postTone1: tone1, postTone2: tone2, postResponse: response, postDuration: duration, postOnset: onset, postISI: ISI}, function(data){
+		//console.log(data);	       
+   	});
+}
 
 function finish(){
 

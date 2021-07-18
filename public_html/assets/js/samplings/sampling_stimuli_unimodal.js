@@ -41,7 +41,7 @@ function loadTrainingTones(range,nTrials){
 function loadTones(range,drange,nTrials,nt=2){
 	// Reset tone1 and tone2 arrays
 	tone1 = [];
-	if (nt==2) { tone2 = []; }
+	tone2 = [];
 	for (var jj=0;jj<nTrials;jj++){ // looping number of total presentations
 			tones = sampleToneFreqs(range,drange,nt); 
 			tone1[jj] = tones[0];

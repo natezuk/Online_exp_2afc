@@ -117,7 +117,11 @@ function startTask(){
 
 // ========================= block over============================
 	if (trial == nTrials){
-		finish_block(); // show a finish screen for the block
+		if ($task_id==2) { // if it's the second task, there are 2 more blocks
+			$('#instMain2').show();$('#nextMain2').show();$('.textQuestion').hide();
+		} else {
+			finish(); // show a finish screen for the block
+		}
 // ========================= continue to play tones============================
 	}else {
 		trial++;		
@@ -176,18 +180,18 @@ function callTimeout(time,trial){
 	
 
 		// ******************************* KEYBOARD responses ******************************************    
-		allow=true;
-		$( document ).keyup(function(e) { 
-		if(e.which == 49 && allow==true) {
-			keyAnswer1();
-			allow=false;   
+		// allow=true;
+		// $( document ).keyup(function(e) { 
+		// if(e.which == 49 && allow==true) {
+		// 	keyAnswer1();
+		// 	allow=false;   
 
-		} 
-		else if (e.which == 50 && allow==true) {
-			keyAnswer2();
-			allow=false;   	
-		}	
-	});
+		// } 
+		// else if (e.which == 50 && allow==true) {
+		// 	keyAnswer2();
+		// 	allow=false;   	
+		// }	
+	// });
 	},time);	
 
 	// ******************************* MOUSE response 1 ******************************************    
@@ -203,7 +207,14 @@ function callTimeout(time,trial){
 			acc[trial-1] = 1;
 		}	
 		//pressButton();
-		setTimeout(function () {$('.feedback').hide();startTask();},500);
+		// Check if it's time for a break
+		if (trial%pauseTime==0) {
+			setTimeout(function () {$('.feedback').hide();doBreak();},500);		
+			//doBreak();
+		} else {
+			setTimeout(function () {$('.feedback').hide();startTask();},500);
+		}
+		//setTimeout(function () {$('.feedback').hide();startTask();},500);
 	} 	
 	// ******************************* MOUSE response 2 ******************************************    
 	document.getElementById('button2').onclick = function() {
@@ -218,7 +229,14 @@ function callTimeout(time,trial){
 			acc[trial-1] = 0;
 		}	
 		//pressButton();
-		setTimeout(function () {$('.feedback').hide();startTask();},500);
+		// Check if it's time for a break
+		if (trial%pauseTime==0) {
+			setTimeout(function () {$('.feedback').hide();doBreak();},500);		
+			//doBreak();
+		} else {
+			setTimeout(function () {$('.feedback').hide();startTask();},500);
+		}
+		//setTimeout(function () {$('.feedback').hide();startTask();},500);
 	} 	
 }
 
@@ -230,7 +248,7 @@ function staircaseTask(){
 
 		// Calculate the JND at the end
 		JND = calculate_jnd(smt_set);
-		$('#instAdapt').show();$('#nextAdapt').show();$('.textQuestion').hide();
+		$('#instMain1').show();$('#nextMain1').show();$('.textQuestion').hide();
 	} else {
 		trial++;
 		// Display information about the trial
@@ -287,18 +305,18 @@ function callTimeoutAdapt(time,trial){
 	
 
 		// ******************************* KEYBOARD responses ******************************************    
-		allow=true;
-		$( document ).keyup(function(e) { 
-		if(e.which == 49 && allow==true) {
-			keyAnswer1();
-			allow=false;   
+		// allow=true;
+		// $( document ).keyup(function(e) { 
+		// if(e.which == 49 && allow==true) {
+		// 	keyAnswer1();
+		// 	allow=false;   
 
-		} 
-		else if (e.which == 50 && allow==true) {
-			keyAnswer2();
-			allow=false;   	
-		}	
-	});
+		// } 
+		// else if (e.which == 50 && allow==true) {
+		// 	keyAnswer2();
+		// 	allow=false;   	
+		// }	
+	// });
 	},time);	
 
 	// ******************************* MOUSE response 1 ******************************************    
@@ -363,13 +381,14 @@ function pressButton(){
 
 function doBreak(){
 	$('.Qbuttons').hide();$('.textQuestion').hide();$('.feedback').hide(); // hide linking to the next page
-	if (breaks==(nTrials/pauseTime-2)){
-		$('#break2').show();
-	} else if (breaks==(nTrials/pauseTime-1)) {
-		$('#break3').show();
-	} else {
-		$('#break').show();
-	}
+	// if (breaks==(nTrials/pauseTime-2)){
+	// 	$('#break2').show();
+	// } else if (breaks==(nTrials/pauseTime-1)) {
+	// 	$('#break3').show();
+	// } else {
+	// 	$('#break').show();
+	// }
+	$('#break').show();
 	//===================== showing block feedback=============
 	// var sum = 0;
 	// for (var ii = trial - pauseTime; ii < trial; ii++){
