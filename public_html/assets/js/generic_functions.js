@@ -257,12 +257,29 @@ function calculate_jnd(smt_set) {
 	}
 	var first_reversal = ii;
 
-	/// Calculate the average semitone difference from the first reversal
-	var jnd = 0;
+	/// Calculate the geometric average semitone difference from the first reversal
+	/// (geometric average is more appropriate because intervals are doubled/halved each step)
+	//var jnd_rev = 0;
+	var jnd_rev = 1;
 	for (ii=first_reversal; ii<smt_set.length; ii++) {
-		jnd += smt_set[ii]; // sum the smt together after the first reversal
+		//jnd_rev += smt_set[ii]; // sum the smt together after the first reversal
+		jnd_rev *= smt_set[ii]; // multiply smt into total
 	}
-	jnd = jnd/(smt_set.length-first_reversal);
+	///jnd_rev = jnd_rev/(smt_set.length-first_reversal);
+	jnd_rev = Math.pow(jnd_rev,1/(smt_set.length-first_reversal));
+
+	/// Calculate the average from 8th trial
+	var jnd_ntr = 1;
+	for (ii=7; ii<smt_set.length; ii++) {
+		jnd_ntr += smt_set[ii];
+	}
+	///jnd_ntr = jnd_ntr/(smt.length-7);
+	jnd_ntr = Math.pow(jnd_ntr,1/(smt.length-7));
+
+	/// Use the minimum of the two possible values
+	/// (if subjects accidentally make a wrong choice early on, the second option
+	/// will give them a more appropriate JND)
+	jnd = Math.min(jnd_rev,jnd_ntr);
 
 	// Return this value
 	return jnd;
