@@ -265,22 +265,24 @@ function calculate_jnd(smt_set) {
 
 	/// Calculate the geometric average semitone difference from the first reversal
 	/// (geometric average is more appropriate because intervals are doubled/halved each step)
-	//var jnd_rev = 0;
-	var jnd_rev = 1;
-	for (ii=first_reversal; ii<smt_set.length; ii++) {
-		//jnd_rev += smt_set[ii]; // sum the smt together after the first reversal
-		jnd_rev *= smt_set[ii]; // multiply smt into total
+	/// (geomean may be too inaccurate, change back to mean)
+	/// (smt_set has one additional index, added after the last trial)
+	var jnd_rev = 0;
+	//var jnd_rev = 1;
+	for (ii=first_reversal; ii<smt_set.length-1; ii++) {
+		jnd_rev += smt_set[ii]; // sum the smt together after the first reversal
+		//jnd_rev *= smt_set[ii]; // multiply smt into total
 	}
-	///jnd_rev = jnd_rev/(smt_set.length-first_reversal);
-	jnd_rev = Math.pow(jnd_rev,1/(smt_set.length-first_reversal));
+	jnd_rev = jnd_rev/(smt_set.length-first_reversal-1);
+	//jnd_rev = Math.pow(jnd_rev,1/(smt_set.length-first_reversal));
 
 	/// Calculate the average from 8th trial
-	var jnd_ntr = 1;
-	for (ii=7; ii<smt_set.length; ii++) {
+	var jnd_ntr = 0;
+	for (ii=7; ii<smt_set.length-1; ii++) {
 		jnd_ntr += smt_set[ii];
 	}
-	///jnd_ntr = jnd_ntr/(smt.length-7);
-	jnd_ntr = Math.pow(jnd_ntr,1/(smt_set.length-7));
+	jnd_ntr = jnd_ntr/(smt_set.length-8);
+	//jnd_ntr = Math.pow(jnd_ntr,1/(smt_set.length-7));
 
 	/// Use the minimum of the two possible values
 	/// (if subjects accidentally make a wrong choice early on, the second option
