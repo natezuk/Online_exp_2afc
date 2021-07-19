@@ -2,9 +2,9 @@
 // ********  DEMO  *******
 // ===============
 
-// Demo tone frequencies should be betwee 400-1600 Hz (same as training set)
+// Demo tone frequencies should cover most of range of possible tones.
 // * Note: values are 2x the actual frequency because of the way they are named
-var demo_tones = [800,1400,2200,3000];
+var demo_tones = [600,1500,3400,5600];
 
 // ******************************* response 1 -- ask questions ******************************************    
 	document.getElementById('Dbutton1').onclick = function() {
