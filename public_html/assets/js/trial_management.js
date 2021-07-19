@@ -1,21 +1,26 @@
+// ======
+// Experiment IDs
+// ======
+var exp_id = 1;
+var task_id = 0; // task_id
+
 // ================
 // ******* Training ******* 
 // ================
 var trainingLength=5; //30
 var trainingTrial=0;
 var trainCorrect=0;
-var task_id = 0; // task_id
 
 // ====================
 // ******* Task! ******* 
 // =====================
-var nTrials = 30; //300 //160
+var nTrials = 160; //300 //160
 	// number of trials per 2 blocks
 var nTrainingTrials = 5;
-var nAdaptTrials = 20; //60
+var nAdaptTrials = 60; //60
 var trial=0;
 var block=0;
-var pauseTime=15; //100 //80
+var pauseTime=80; //100 //80
 	// number of trials before the break (in between blocks)
 var breaks=0;
 

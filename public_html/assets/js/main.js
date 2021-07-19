@@ -1,7 +1,6 @@
 // ######################## Start script only when JQuary finish loading ###########################
 (function($){
 $(document).ready(function(){
-	
 
 // ======================
 // ******* Preparing stimuli ******* 
@@ -193,7 +192,7 @@ document.getElementById('nextMain2').onclick = function (){
 
 function save_data(){
 	$.post('data_collector', {postTone1: tone1, postTone2: tone2, postResponse: response, 
-		postDuration: duration, postOnset: onset, postISI: ISI, taskID: task_id}, function(data){
+		postDuration: duration, postOnset: onset, postISI: ISI, taskID: task_id, expID: exp_id}, function(data){
 		//console.log($task_id);	       
    	});
 }

@@ -29,6 +29,9 @@
 <p>What do I mean by "high" and "low" pitch? </p>
  <p>Lets get a feeling of "higher" and "lower" tones by pressing on these squares</p>
  <p>The tones <strong>increase</strong> in pitch from left to right - try it!</p>
+ <p>Can you hear all of the tones? If not, make sure your headphones are connected,</p>
+ <p>and set the volume so that you can comfortably hear all of them.</p>
+ <br>
  <p>Got it? Great - press next</p>
 </div>
 <!-- demo buttons-->
@@ -143,7 +146,7 @@
 <!-- Loading -->
 <div  class="loading">
 <p>Loading....</p>
-<p>This may take 4-5 minutes to complete, please be patient</p>
+<p>This may take a moment to complete, please be patient</p>
 </div>
 
 

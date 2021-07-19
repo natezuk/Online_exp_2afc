@@ -44,15 +44,15 @@ function safe_decode($str)
 }
 
 // Include a task ID
-function insert_results($array,$userId,$task_id,$connection,$field_id)
+function insert_results($array,$userId,$task_id,$exp_id,$connection,$field_id)
 {
        $tableName = 'results';
 		$insert = "INSERT INTO `{$tableName}` ";
-        $insert.= "(`result`,`additional_data`,`field_id`,`task_id`,`user_id`,`creation_time`,`modification_time`,`active`) ";
+        $insert.= "(`result`,`additional_data`,`field_id`,`task_id`,`exp_id`,`user_id`,`creation_time`,`modification_time`,`active`) ";
         $insert.= "VALUES ";
-		$insert.= "('{$array}','','{$field_id}','{$task_id}','{$userId}',NOW(),null,1)";
+		$insert.= "('{$array}','','{$field_id}','{$task_id}','{$exp_id}','{$userId}',NOW(),null,1)";
 
-        print_r($task_id);
+        //print_r($task_id);
 		
 		$results = mysqli_query($connection,$insert);        
         if(!$results) return '0';      

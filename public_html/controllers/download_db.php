@@ -12,13 +12,19 @@ $output = fopen('php://output', 'w');
 
 // output the column headings
 //fputcsv($output, array('sub_experiment_name', 'field_name', 'result', 'user_id'));
-fputcsv($output, array('creation_time','user_id','field_id','task_id','result'));
+fputcsv($output, array('creation_time','user_id','workerId','age','gender','musical_experience',
+  'field_id','task_id','exp_id','result'));
 
 $select = 'SELECT
 results.creation_time AS creation_time,
 users.id AS user_id,
+users.worker_id AS worker_id,
+users.age AS age,
+users.gender AS gender,
+users.musical_experience AS musical_experience,
 results.field_id AS field_id,
 results.task_id AS task_id,
+results.exp_id AS exp_id,
 results.result AS result
 FROM results
 LEFT JOIN users
