@@ -2,8 +2,8 @@
 % Nate Zuk (2021)
 
 frq = 150:0.5:5100; % set of stimulus frequencies (in Hz)
-Fs = 22050; % sampling rate of the stimuli (in Hz)
-tone_dur = 50; % duration of the tone (in ms)
+Fs = 44100; % sampling rate of the stimuli (in Hz)
+tone_dur = 100; % duration of the tone (in ms)
 ramp_time = 5; % duration of onset and offset cosine ramp
 snd_path = '../tones/';
 

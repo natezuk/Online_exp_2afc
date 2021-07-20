@@ -80,7 +80,8 @@ document.getElementById('next4').onclick = function() {
 	// loadTrainingTones([400,1600]);
 	loadOnsets([500,500],nTrainingTrials); //500
 	//loadDurations([220,220],nTrials); //220
-	loadDurations([70,70],nTrainingTrials); // 50 ms tone durations, add 20 ms?
+	// Changed sound durations to 10, add 20 ms
+	loadDurations([120,120],nTrainingTrials); // 50 ms tone durations, add 20 ms?
 	loadISIs([750,750],nTrainingTrials); //800
 	// ==================================================
 	startTaskTraining();
@@ -102,7 +103,7 @@ document.getElementById('nextAdapt').onclick = function() {
 	loadTones([400,1600],[2],nAdaptTrials,1); 
 		// the [2] for the semitone difference is a place holder since the second tones aren't calculated here
 	loadOnsets([500,500],nAdaptTrials);
-	loadDurations([70,70],nAdaptTrials);
+	loadDurations([120,120],nAdaptTrials);
 	loadISIs([750,750],nAdaptTrials);
 	/// Preload the wavs for the first tones
 	preLoadingToneSet(tone1.slice()); // .slice() copies the array and creates a new reference
@@ -132,7 +133,7 @@ document.getElementById('nextMain1').onclick = function (){
 	task_id = 2;
 	loadTones([low_freq_range[0],low_freq_range[0]*4],smt_diff_touse,nTrials); // Vincent and Itay
 	loadOnsets([500,500],nTrials);
-	loadDurations([70,70],nTrials);
+	loadDurations([120,120],nTrials);
 	if (cntrnd[0]==1) { // random ISIs
 		loadISIs([500,1000],nTrials);
 	} else {
@@ -161,7 +162,7 @@ document.getElementById('nextMain2').onclick = function (){
 	//loadTones([500,2000],[1.005,1.1],nTrials); // Vincent and Itay
 	loadTones([low_freq_range[1],low_freq_range[1]*4],smt_diff_touse,nTrials); // Vincent and Itay
 	loadOnsets([500,500],nTrials);
-	loadDurations([70,70],nTrials);
+	loadDurations([120,120],nTrials);
 	if (cntrnd[1]==1) { // random ISIs
 		loadISIs([500,1000],nTrials);
 	} else {
