@@ -42,10 +42,10 @@ if (isset($_POST["submit"])) {
 	//$message["style"] = "alert-danger";
 	//$proceedToTheNextPage = false;
 	
-	// The age should be between 18-120.
+	// The age should be between 18-40.
 	$age = (int)trim($_POST["age"]);
-	if ($age < 19 || $age > 50) {
-		$message["text"] = "You need to be between 18-50 to participate in the experiment.";
+	if ($age < 18 || $age > 40) {
+		$message["text"] = "You need to be between 18-40 to participate in the experiment.";
 		$message["style"] = "alert-danger";
 		$proceedToTheNextPage = false;
 	}

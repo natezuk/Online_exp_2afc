@@ -218,10 +218,12 @@ function initAdapt() {
 // *******  Perform adaptivity   ******* 
 // =========================
 /// This function does a 3-down 1-up staircase procedure
+/// (20-7-2021) Changed to 2-down 1-up procedure
 function adapt(acc) {
 	if (acc == 1){ // following *correct* answer
 		success++;
-		if (success==3){  //step down
+		/// (20-7-2021) Change to 2-down 1-up
+		if (success==2){  //step down
 			//if (trig==0){
 			//    reversal++;
 			//}
@@ -234,7 +236,7 @@ function adapt(acc) {
 			//}
 			success=0;
 			//trig=1;
-		} else { // if there are < 3 correct responses in a row
+		} else { // if there are < 2 correct responses in a row
 			smt_set.push(smt_set[smt_set.length-1]);
 
 			}
