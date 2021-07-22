@@ -3,6 +3,10 @@
 
 # Ignore sound files
 *.wav
+*.ogg
+*.mp3
+*.mp4
+*.flac
 
 # Ignore docx files
 *.doc
