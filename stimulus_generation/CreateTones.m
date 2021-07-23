@@ -21,7 +21,8 @@ for n = 1:length(frq)
         % so it can be saved as an integer value
         % (22-7-2021) Changed to mp4, might have better browser
         % compatability
-    audiowrite([snd_path snd_fl],x,Fs);
+%     audiowrite([snd_path snd_fl],x,Fs,'BitsPerSample',16);
+    audiowrite([snd_path snd_fl],x,Fs,'Quality',100);
 %     mp3write(x,Fs,16,snd_fl);
     % Display that the sound has been saved
     disp(snd_fl);
