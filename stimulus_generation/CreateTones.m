@@ -1,7 +1,7 @@
 % Create the set of pure tones used in the two_tone_varyisi experiment
 % Nate Zuk (2021)
 
-% addpath('C:\Users\natha\Documents\MATLAB\mp3readwrite\');
+addpath('C:\Users\natha\Documents\MATLAB\mp3readwrite\');
 
 frq = 150:0.5:5100; % set of stimulus frequencies (in Hz)
 % frq = 150:50:5100;
@@ -17,13 +17,16 @@ for n = 1:length(frq)
     % Apply the ramp
     x = apply_ramps(x,ramp_time,Fs);
     % Save the audio
-    snd_fl = sprintf('%d.ogg',frq(n)*2); % save at 2x the actual frequency,
+    snd_fl = sprintf('%d.flac',frq(n)*2); % save at 2x the actual frequency,
         % so it can be saved as an integer value
         % (22-7-2021) Changed to mp4, might have better browser
         % compatability
-%     audiowrite([snd_path snd_fl],x,Fs,'BitsPerSample',16);
-    audiowrite([snd_path snd_fl],x,Fs,'Quality',100);
-%     mp3write(x,Fs,16,snd_fl);
+        % (23-7-2021) After trying a bunch of audio formats, flac was the
+        % most reliable, though it did not run on Firefox and sounded
+        % choppy on Safari.
+    audiowrite([snd_path snd_fl],x,Fs,'BitsPerSample',16);
+%     audiowrite([snd_path snd_fl],x,Fs,'Quality',100);
+%     mp3write(x,Fs,16,[snd_path snd_fl]);
     % Display that the sound has been saved
     disp(snd_fl);
 end
