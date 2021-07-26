@@ -30,6 +30,11 @@ $(window).load(function(){
 		// select constant
 		cntrnd = [0,1];
 	}
+
+	// Setup the web audio context (for Web Audio API)
+	const AudioContext = window.AudioContext || window.webkitAudioContext;
+	const audioCtx = new AudioContext();
+
 	// Now load the demo/training stimuli
 	loadTrainingTones([400,1600],nTrainingTrials);
 	preLoadingToneSet(tone1Training.concat(tone2Training,demo_tones))
@@ -109,6 +114,7 @@ document.getElementById('nextAdapt').onclick = function() {
 	preLoadingToneSet(tone1.slice()); // .slice() copies the array and creates a new reference
 		// otherwise tone1 will change in addition the local array in the function
 	/// Start the adaptive task
+	//s.get(Math.max(...tone1)).addEventListener('canplaythrough',staircaseTask());
 	staircaseTask();
 	// Save the data
 	//save_data(); // now placed in staircaseTask()

@@ -23,18 +23,7 @@ var low_freq_range; var cntrnd;
 // ===============================
 // ******* Preloading ******* 
 // ===============================
-function preLoading() { 
-		for (var ii=mode1[0];ii<mode1[1];ii++){ // looping number of total presentations
-			//name1='//127.0.0.1/wav/'+ii+'_1.wav';
-			//name1='http://54.68.5.226/globalAssets/wav/'+ii+'_1.wav';
-			name1='http://localhost/tones/'+ii+'.wav';
 
-			// s1[ii]= new Audio(name1);
-			// s1[ii].addEventListener('canplaythrough', isPreLoad); 
-			// s1[ii].addEventListener('error', failFunc(fails)); 
-			// s1[ii].removeEventListener('canplaythrough',function(){}); 		
-		}						
-}
 // ====
 // ** Preload specific tones **
 // ====
@@ -59,16 +48,20 @@ function preLoadingToneSet(tone_freqs) {
 	// Set numToLoad to the number of stimuli being loaded
 	numToLoad = tone_freqs.length;
 	for (var ii=0;ii<tone_freqs.length;ii++){ // looping number of total presentations
-		//name1='//127.0.0.1/wav/'+ii+'_1.wav';
-		//name1='http://54.68.5.226/globalAssets/wav/'+ii+'_1.wav';
-		name1='http://localhost:8888/tones/'+tone_freqs[ii]+'.wav';
+		//name1='http://localhost/tones/'+tone_freqs[ii]+'.wav';
+		name1='http://18.208.218.5/tones/'+tone_freqs[ii]+'.flac';
 
-		snd = new Audio(name1);
-		snd.addEventListener('canplaythrough', isPreLoad); 
-		snd.addEventListener('error', failFunc(fails)); 
-		snd.removeEventListener('canplaythrough',function(){}); 	
+		// var snd_buffer = await getSnd(audioCtx, name1);
+		//snd = new Audio(name1);
+		// snd.addEventListener('canplaythrough', isPreLoad); 
+		// snd.addEventListener('error', failFunc(fails)); 
+		// snd.removeEventListener('canplaythrough',function(){}); 	
 		// store it in the Map
-		s.set(tone_freqs[ii],snd);
+		//s.set(tone_freqs[ii],snd);
+		getSnd(audioCtx, name1)
+			.then((audioBuffer) => {
+				s.set(tone_freq[ii],snd_buffer);
+			});
 		// s[ii]= new Audio(name1);
 		// s[ii].addEventListener('canplaythrough', isPreLoad); 
 		// s[ii].addEventListener('error', failFunc(fails)); 
@@ -101,6 +94,10 @@ function isPreLoad() {
 	}
 }
 
-
-
-
+// Create an asynchronous function that loads a sound file and stores it in an AudioBuffer
+async function getSnd(audioContext, filepath) {
+	const response = await fetch(filepath);
+	const arrayBuffer = await response.arrayBuffer();
+	const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+	return audioBuffer;
+}
