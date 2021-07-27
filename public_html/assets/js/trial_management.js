@@ -281,24 +281,31 @@ function staircaseTask(){
 		var f = Math.round(tone1[trial-1]/2 * 2**(dir*smt_set[trial-1]/12) * 2); // calculate the frequency of tone2
 		tone2.push(f);
 		// Load this tone
-		fl_nm = 'http://localhost:8888/tones/'+tone2[trial-1]+'.wav';
+		//fl_nm = 'http://localhost/tones/'+tone2[trial-1]+'.wav';
+		fl_nm = 'http://localhost/tones/'+tone2[trial-1]+'.flac';
 		var s2_adapt = new Audio(fl_nm);
+		s2_adapt.setAttribute('preload','none');
+		// don't play the sounds until the second one is playable
+		//s2_adapt.addEventListener('canplaythrough', event => {
+		//if (s2_adapt.readyState==4) {
+			//s2_adapt.removeEventListener('canplaythrough', function(){});
+			// ** Present the sounds
+			// setTimeout(function () {s1[tone1[trial-1]].play()},onset[trial-1]);
+			// // -----stop first tone ------
+			// setTimeout(function () {s1[tone1[trial-1]].pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
+			// setTimeout(function () {s1[tone1[trial-1]].currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
+			setTimeout(function () {s.get(tone1[trial-1]).play()},onset[trial-1]);
+			// -----stop first tone ------
+			setTimeout(function () {s.get(tone1[trial-1]).pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
+			setTimeout(function () {s.get(tone1[trial-1]).currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
+			// -----play second tone ------
+			//setTimeout(function () {s2[tone2[trial-1]].play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
+			setTimeout(function () {s2_adapt.play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
+			//callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
+			// Provide feedback after each trial
+			callTimeoutAdapt(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
 
-		// ** Present the sounds
-		// setTimeout(function () {s1[tone1[trial-1]].play()},onset[trial-1]);
-		// // -----stop first tone ------
-		// setTimeout(function () {s1[tone1[trial-1]].pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-		// setTimeout(function () {s1[tone1[trial-1]].currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-		setTimeout(function () {s.get(tone1[trial-1]).play()},onset[trial-1]);
-		// -----stop first tone ------
-		setTimeout(function () {s.get(tone1[trial-1]).pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-		setTimeout(function () {s.get(tone1[trial-1]).currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-		// -----play second tone ------
-		//setTimeout(function () {s2[tone2[trial-1]].play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
-		setTimeout(function () {s2_adapt.play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
-		//callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
-		// Provide feedback after each trial
-		callTimeoutAdapt(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
+		//});
 
 		// Adapt based on the user response
 		// The adaptation needs to be put in the callTimeoutAdapt
@@ -349,6 +356,7 @@ function callTimeoutAdapt(time,trial){
 		//pressButton();
 		// Determine the next smt
 		adapt(acc[trial-1]);
+
 		setTimeout(function () {$('.feedback').hide();staircaseTask();},500);
 		//setTimeout(function () {$('.feedback').hide();staircaseTask();},500);
 	} 	

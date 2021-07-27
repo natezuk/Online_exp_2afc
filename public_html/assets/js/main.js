@@ -33,7 +33,7 @@ $(window).load(function(){
 
 	// Setup the web audio context (for Web Audio API)
 	const AudioContext = window.AudioContext || window.webkitAudioContext;
-	const audioCtx = new AudioContext();
+	audioCtx = new AudioContext();
 
 	// Now load the demo/training stimuli
 	loadTrainingTones([400,1600],nTrainingTrials);
@@ -65,6 +65,7 @@ document.getElementById('next1').onclick = function() {
 document.getElementById('next2').onclick = function (){
 	$('#next2').hide();$('#inst1').hide();$('#title1').hide(); // hide stuff
 	$('.Dbuttons').show(); $('#next3').show(); $('#demo').show();$('#axis').show();
+	audioCtx.resume(); // start the audio context here
 	
 // ============================
 // ******* Click next3 --> Instructions ******* 

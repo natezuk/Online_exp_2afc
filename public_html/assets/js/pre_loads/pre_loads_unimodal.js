@@ -7,7 +7,8 @@
 //var s1=[];  //containers for the wavs
 //var s2=[];
 //var s=[]; // use one container for all sounds
-var s=new Map(); // use a map to tag sounds by their 2x frequency values
+var s; // use a map to tag sounds by their 2x frequency values
+var audioCtx;
 var preLoaded=0; // counter for parallel load
 var fails=0;
 var numToLoad=0;
@@ -30,6 +31,7 @@ var low_freq_range; var cntrnd;
 function preLoadingToneSet(tone_freqs) { 
 	// reset the mapping in s
 	s = new Map();
+	//s = [];
 	//let tone_freqs = tones; // copy the tones array (if it's global, it would be rearranged by this function)
 	// tone_freqs specifies all of the frequencies that should be loaded
 	// but first get the unique set of these tone frequencies, so tones aren't loaded twice
@@ -49,7 +51,7 @@ function preLoadingToneSet(tone_freqs) {
 	numToLoad = tone_freqs.length;
 	for (var ii=0;ii<tone_freqs.length;ii++){ // looping number of total presentations
 		//name1='http://localhost/tones/'+tone_freqs[ii]+'.wav';
-		name1='http://18.208.218.5/tones/'+tone_freqs[ii]+'.flac';
+		name1='http://localhost/tones/'+tone_freqs[ii]+'.flac';
 
 		// var snd_buffer = await getSnd(audioCtx, name1);
 		//snd = new Audio(name1);
@@ -58,10 +60,16 @@ function preLoadingToneSet(tone_freqs) {
 		// snd.removeEventListener('canplaythrough',function(){}); 	
 		// store it in the Map
 		//s.set(tone_freqs[ii],snd);
-		getSnd(audioCtx, name1)
-			.then((audioBuffer) => {
-				s.set(tone_freq[ii],snd_buffer);
-			});
+		//let snd = await getSnd(audioCtx, name1);
+		storeSnd(audioCtx, name1, tone_freqs[ii]);
+
+			// .then(sndBuffer => {
+			// 	//s.set(tone_freqs[ii],sndBuffer);
+			// 	s.push(sndBuffer);
+			// 	//snd = sndBuffer;
+			// 	isPreLoad();
+			// });
+		//sndPromise.then(snd => {s.set(tone_freqs[ii],snd)});
 		// s[ii]= new Audio(name1);
 		// s[ii].addEventListener('canplaythrough', isPreLoad); 
 		// s[ii].addEventListener('error', failFunc(fails)); 
@@ -98,6 +106,21 @@ function isPreLoad() {
 async function getSnd(audioContext, filepath) {
 	const response = await fetch(filepath);
 	const arrayBuffer = await response.arrayBuffer();
-	const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-	return audioBuffer;
+	const sndBuffer = await audioContext.decodeAudioData(arrayBuffer);
+	return sndBuffer;
+}
+
+async function storeSnd(audioContext, filepath, tone_freq) {
+	const snd = await getSnd(audioContext, filepath);
+	s.set(tone_freq, snd);
+	isPreLoad();
+}
+
+// Setup function to play sound
+function playSnd(audioContext, audioBuffer, time) {
+    const sampleSource = audioContext.createBufferSource();
+    sampleSource.buffer = audioBuffer;
+    sampleSource.connect(audioContext.destination)
+    sampleSource.start(time);
+    return sampleSource;
 }
