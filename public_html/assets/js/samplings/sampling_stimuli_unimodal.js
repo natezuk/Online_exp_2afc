@@ -9,7 +9,7 @@ var tone1 = [];
 var tone2 = [];
 
 var onset = [];
-var duration = [];
+//var duration = [];
 var ISI = [];
 
 

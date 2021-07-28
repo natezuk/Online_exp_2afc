@@ -87,8 +87,9 @@ document.getElementById('next4').onclick = function() {
 	loadOnsets([500,500],nTrainingTrials); //500
 	//loadDurations([220,220],nTrials); //220
 	// Changed sound durations to 10, add 20 ms
-	loadDurations([120,120],nTrainingTrials); // 50 ms tone durations, add 20 ms?
-	loadISIs([750,750],nTrainingTrials); //800
+	// loadDurations([120,120],nTrainingTrials); // 50 ms tone durations, add 20 ms?
+	//loadISIs([750,750],nTrainingTrials); //800
+	loadISIs([650,650],nTrainingTrials); // 100 ms less than the interonset interval of 750 ms
 	// ==================================================
 	startTaskTraining();
 	// Save the data
@@ -109,8 +110,9 @@ document.getElementById('nextAdapt').onclick = function() {
 	loadTones([400,1600],[2],nAdaptTrials,1); 
 		// the [2] for the semitone difference is a place holder since the second tones aren't calculated here
 	loadOnsets([500,500],nAdaptTrials);
-	loadDurations([120,120],nAdaptTrials);
-	loadISIs([750,750],nAdaptTrials);
+	//loadDurations([120,120],nAdaptTrials);
+	//loadISIs([750,750],nAdaptTrials);
+	loadISIs([650,650],nAdaptTrials);
 	/// Preload the wavs for the first tones
 	preLoadingToneSet(tone1.slice()); // .slice() copies the array and creates a new reference
 		// otherwise tone1 will change in addition the local array in the function
@@ -140,11 +142,13 @@ document.getElementById('nextMain1').onclick = function (){
 	task_id = 2;
 	loadTones([low_freq_range[0],low_freq_range[0]*4],smt_diff_touse,nTrials); // Vincent and Itay
 	loadOnsets([500,500],nTrials);
-	loadDurations([120,120],nTrials);
+	//loadDurations([120,120],nTrials);
 	if (cntrnd[0]==1) { // random ISIs
-		loadISIs([500,1000],nTrials);
+		// loadISIs([500,1000],nTrials);
+		loadISIs([400,900],nTrials);
 	} else {
-		loadISIs([750,750],nTrials);
+		//loadISIs([750,750],nTrials);
+		loadISIs([650,650],nTrials);
 	}
 	// Load the stimuli for these two blocks
 	preLoadingToneSet(tone1.concat(tone2));
@@ -169,7 +173,7 @@ document.getElementById('nextMain2').onclick = function (){
 	//loadTones([500,2000],[1.005,1.1],nTrials); // Vincent and Itay
 	loadTones([low_freq_range[1],low_freq_range[1]*4],smt_diff_touse,nTrials); // Vincent and Itay
 	loadOnsets([500,500],nTrials);
-	loadDurations([120,120],nTrials);
+	//loadDurations([120,120],nTrials);
 	if (cntrnd[1]==1) { // random ISIs
 		loadISIs([500,1000],nTrials);
 	} else {

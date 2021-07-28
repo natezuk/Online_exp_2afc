@@ -49,9 +49,13 @@ function preLoadingToneSet(tone_freqs) {
 	}
 	// Set numToLoad to the number of stimuli being loaded
 	numToLoad = tone_freqs.length;
+	p = []; // stores promises
 	for (var ii=0;ii<tone_freqs.length;ii++){ // looping number of total presentations
 		//name1='http://localhost/tones/'+tone_freqs[ii]+'.wav';
 		name1='http://localhost/tones/'+tone_freqs[ii]+'.flac';
+
+		// Load each sound buffer (stored as a promise)
+		p.push(getSnd(audioCtx, name1));
 
 		// var snd_buffer = await getSnd(audioCtx, name1);
 		//snd = new Audio(name1);
@@ -61,7 +65,7 @@ function preLoadingToneSet(tone_freqs) {
 		// store it in the Map
 		//s.set(tone_freqs[ii],snd);
 		//let snd = await getSnd(audioCtx, name1);
-		storeSnd(audioCtx, name1, tone_freqs[ii]);
+		//storeSnd(audioCtx, name1, tone_freqs[ii]);
 
 			// .then(sndBuffer => {
 			// 	//s.set(tone_freqs[ii],sndBuffer);
@@ -74,7 +78,16 @@ function preLoadingToneSet(tone_freqs) {
 		// s[ii].addEventListener('canplaythrough', isPreLoad); 
 		// s[ii].addEventListener('error', failFunc(fails)); 
 		// s[ii].removeEventListener('canplaythrough',function(){}); 		
-	}						
+	}
+	
+	// Wait until all of the promises have been fulfilled before storing them
+	Promise.all(p).then((values) => {
+		for (var ii=0;ii<tone_freqs.length;ii++) {
+			s.set(tone_freqs[ii],p[ii]);
+			// remove the loading text
+			$('.loading').hide();
+		}
+	})
 }
 
 // =================================
@@ -110,17 +123,16 @@ async function getSnd(audioContext, filepath) {
 	return sndBuffer;
 }
 
-async function storeSnd(audioContext, filepath, tone_freq) {
-	const snd = await getSnd(audioContext, filepath);
-	s.set(tone_freq, snd);
-	isPreLoad();
+function storeSnd(audioContext, filepath, tone_freq) {
+	getSnd(audioContext, filepath)
+		.then(function(sndBuffer, tone_freq) {
+			s.set(tone_freq, sndBuffer);
+			isPreLoad();
+		});
 }
 
-// Setup function to play sound
-function playSnd(audioContext, audioBuffer, time) {
-    const sampleSource = audioContext.createBufferSource();
-    sampleSource.buffer = audioBuffer;
-    sampleSource.connect(audioContext.destination)
-    sampleSource.start(time);
-    return sampleSource;
-}
+// async function storeSnd(audioContext, filepath, tone_freq) {
+// 	const snd = await getSnd(audioContext, filepath);
+// 	s.set(tone_freq, snd);
+// 	isPreLoad();
+// }

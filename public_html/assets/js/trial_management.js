@@ -4,6 +4,12 @@
 var exp_id = 1;
 var task_id = 0; // task_id
 
+// ======
+// Trial info
+// ======
+var duration = 100; // duration of each tone (used for scheduling tone 2)
+var offset = 50; // number of ms before the buttons appear
+
 // ================
 // ******* Training ******* 
 // ================
@@ -14,13 +20,13 @@ var trainCorrect=0;
 // ====================
 // ******* Task! ******* 
 // =====================
-var nTrials = 160; //300 //160
+var nTrials = 40; //300 //160
 	// number of trials per 2 blocks
 var nTrainingTrials = 5;
-var nAdaptTrials = 60; //60
+var nAdaptTrials = 20; //60
 var trial=0;
 var block=0;
-var pauseTime=80; //100 //80
+var pauseTime=20; //100 //80
 	// number of trials before the break (in between blocks)
 var breaks=0;
 
@@ -72,13 +78,25 @@ function startTaskTraining(){
 		// setTimeout(function () {s2[tone2Training[trainingTrial-1]].play()},onset[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1]);
 		// callTimeoutTraining(onset[trainingTrial-1]+duration[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1],trial); 
 		// -----play first tone ------
-		setTimeout(function () {s.get(tone1Training[trainingTrial-1]).play()},onset[trainingTrial-1]);
-		// -----stop first tone ------
-		setTimeout(function () {s.get(tone1Training[trainingTrial-1]).pause()},onset[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1]-10);
-		setTimeout(function () {s.get(tone1Training[trainingTrial-1]).currentTime = 0},onset[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1]-10);
-		// -----play second tone ------
-		setTimeout(function () {s.get(tone2Training[trainingTrial-1]).play()},onset[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1]);
-		callTimeoutTraining(onset[trainingTrial-1]+duration[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1],trial); 
+		// setTimeout(function () {s.get(tone1Training[trainingTrial-1]).play()},onset[trainingTrial-1]);
+		// // -----stop first tone ------
+		// setTimeout(function () {s.get(tone1Training[trainingTrial-1]).pause()},onset[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1]-10);
+		// setTimeout(function () {s.get(tone1Training[trainingTrial-1]).currentTime = 0},onset[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1]-10);
+		// // -----play second tone ------
+		// setTimeout(function () {s.get(tone2Training[trainingTrial-1]).play()},onset[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1]);
+		// callTimeoutTraining(onset[trainingTrial-1]+duration[trainingTrial-1]+duration[trainingTrial-1]+ISI[trainingTrial-1],trial); 
+
+		// Use AudioBuffers to play the sounds
+		playTonePair(audioCtx, s.get(tone1Training[trainingTrial-1]), s.get(tone2Training[trainingTrial-1]),
+			onset[trainingTrial-1], duration, ISI[trainingTrial-1]);
+			// audio scheduler takes seconds, not milliseconds
+		// show the buttons after presenting both tones
+		callTimeoutTraining(onset[trainingTrial-1]+2*duration+ISI[trainingTrial-1]+offset,trial); 
+		//s1
+		// playSnd(audioCtx, s.get([tone1Training[trainingTrial-1]), onset[trainingTrial-1]);
+		// //s2
+		// playSnd(audioCtx, s.get([tone2Training[trainingTrial-1], onset[traininTrial-1]);
+
 	}
 }
 
@@ -160,6 +178,12 @@ function startTask(){
 		// -----play first tone ------
 		console.log(tone1[trial-1])
 
+		// Play using AudioBuffers
+		playTonePair(audioCtx, s.get(tone1[trial-1]), s.get(tone2[trial-1]),
+			onset[trial-1], duration, ISI[trial-1]);
+		// show the buttons after presenting both tones
+		callTimeout(onset[trial-1]+2*duration+ISI[trial-1]+offset,trial); 
+
 		// setTimeout(function () {s1[tone1[trial-1]].play()},onset[trial-1]);
 		// // -----stop first tone ------
 		// setTimeout(function () {s1[tone1[trial-1]].pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
@@ -167,15 +191,15 @@ function startTask(){
 		// // -----play second tone ------
 		// setTimeout(function () {s2[tone2[trial-1]].play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
 
-		setTimeout(function () {s.get(tone1[trial-1]).play()},onset[trial-1]);
-		// -----stop first tone ------
-		setTimeout(function () {s.get(tone1[trial-1]).pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-		setTimeout(function () {s.get(tone1[trial-1]).currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-		// -----play second tone ------
-		setTimeout(function () {s.get(tone2[trial-1]).play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
-		//callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
-		// Provide feedback after each trial
-		callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
+		// setTimeout(function () {s.get(tone1[trial-1]).play()},onset[trial-1]);
+		// // -----stop first tone ------
+		// setTimeout(function () {s.get(tone1[trial-1]).pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
+		// setTimeout(function () {s.get(tone1[trial-1]).currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
+		// // -----play second tone ------
+		// setTimeout(function () {s.get(tone2[trial-1]).play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
+		// //callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
+		// // Provide feedback after each trial
+		// callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
 	}
 }
 
@@ -283,8 +307,15 @@ function staircaseTask(){
 		// Load this tone
 		//fl_nm = 'http://localhost/tones/'+tone2[trial-1]+'.wav';
 		fl_nm = 'http://localhost/tones/'+tone2[trial-1]+'.flac';
-		var s2_adapt = new Audio(fl_nm);
-		s2_adapt.setAttribute('preload','none');
+		// load into an audio buffer, then start the trial once it's loaded
+		getSnd(audioCtx,fl_nm)
+			.then((sndBuffer) => {
+				playTonePair(audioCtx, s.get(tone1[trial-1]), sndBuffer,
+					onset[trial-1], duration, ISI[trial-1]);
+					callTimeoutAdapt(onset[trial-1]+2*duration+ISI[trial-1]+offset,trial)
+			})
+		// var s2_adapt = new Audio(fl_nm);
+		// s2_adapt.setAttribute('preload','none');
 		// don't play the sounds until the second one is playable
 		//s2_adapt.addEventListener('canplaythrough', event => {
 		//if (s2_adapt.readyState==4) {
@@ -294,16 +325,16 @@ function staircaseTask(){
 			// // -----stop first tone ------
 			// setTimeout(function () {s1[tone1[trial-1]].pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
 			// setTimeout(function () {s1[tone1[trial-1]].currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-			setTimeout(function () {s.get(tone1[trial-1]).play()},onset[trial-1]);
-			// -----stop first tone ------
-			setTimeout(function () {s.get(tone1[trial-1]).pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-			setTimeout(function () {s.get(tone1[trial-1]).currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
-			// -----play second tone ------
-			//setTimeout(function () {s2[tone2[trial-1]].play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
-			setTimeout(function () {s2_adapt.play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
-			//callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
-			// Provide feedback after each trial
-			callTimeoutAdapt(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
+			// setTimeout(function () {s.get(tone1[trial-1]).play()},onset[trial-1]);
+			// // -----stop first tone ------
+			// setTimeout(function () {s.get(tone1[trial-1]).pause()},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
+			// setTimeout(function () {s.get(tone1[trial-1]).currentTime = 0},onset[trial-1]+duration[trial-1]+ISI[trial-1]-10);
+			// // -----play second tone ------
+			// //setTimeout(function () {s2[tone2[trial-1]].play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
+			// setTimeout(function () {s2_adapt.play()},onset[trial-1]+duration[trial-1]+ISI[trial-1]);
+			// //callTimeout(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
+			// // Provide feedback after each trial
+			// callTimeoutAdapt(onset[trial-1]+duration[trial-1]+duration[trial-1]+ISI[trial-1],trial); 
 
 		//});
 
@@ -457,7 +488,19 @@ function keyAnswer2(){
 	pressButton();
 }
 
+//======= Function for tone presentaiton =======
+function playTonePair(audioContext, s1, s2, o, dur, isi) {
+	cT = audioContext.currentTime;
+	// note: audio scheduler takes seconds, not milliseconds
+	playSnd(audioContext, s1, cT+o/1000);
+	playSnd(audioContext, s2, cT+(o+dur+isi)/1000);
+}
 
-
-
-
+// Setup function to play sound
+function playSnd(audioContext, audioBuffer, time) {
+    const sampleSource = audioContext.createBufferSource();
+    sampleSource.buffer = audioBuffer;
+    sampleSource.connect(audioContext.destination)
+    sampleSource.start(time);
+    return sampleSource;
+}
