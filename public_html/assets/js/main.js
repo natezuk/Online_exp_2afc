@@ -175,9 +175,9 @@ document.getElementById('nextMain2').onclick = function (){
 	loadOnsets([500,500],nTrials);
 	//loadDurations([120,120],nTrials);
 	if (cntrnd[1]==1) { // random ISIs
-		loadISIs([500,1000],nTrials);
+		loadISIs([400,900],nTrials);
 	} else {
-		loadISIs([750,750],nTrials);
+		loadISIs([650,650],nTrials);
 	}
 	// Load the stimuli for these two blocks
 	preLoadingToneSet(tone1.concat(tone2));

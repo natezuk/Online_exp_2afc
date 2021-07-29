@@ -38,7 +38,7 @@ function preLoadingToneSet(tone_freqs) {
 	tone_freqs.sort((a,b) => a-b); // ascending order
 	// remove repeats
 	var ii=1;
-	var snd; // setup variable to store the temporary sound for each iteration
+	//var snd; // setup variable to store the temporary sound for each iteration
 	while (ii<=tone_freqs.length) {
 		if (tone_freqs[ii]==tone_freqs[ii-1]) {
 			tone_freqs.splice(ii-1,1); // remove the previous value
@@ -49,45 +49,14 @@ function preLoadingToneSet(tone_freqs) {
 	}
 	// Set numToLoad to the number of stimuli being loaded
 	numToLoad = tone_freqs.length;
-	p = []; // stores promises
+	preLoaded = 0; // reset preLoaded
 	for (var ii=0;ii<tone_freqs.length;ii++){ // looping number of total presentations
-		//name1='http://localhost/tones/'+tone_freqs[ii]+'.wav';
-		name1='http://localhost/tones/'+tone_freqs[ii]+'.flac';
+		name1='http://localhost/tones/'+tone_freqs[ii]+'.wav';
+		//name1='http://localhost/tones/'+tone_freqs[ii]+'.flac';
 
-		// Load each sound buffer (stored as a promise)
-		p.push(getSnd(audioCtx, name1));
-
-		// var snd_buffer = await getSnd(audioCtx, name1);
-		//snd = new Audio(name1);
-		// snd.addEventListener('canplaythrough', isPreLoad); 
-		// snd.addEventListener('error', failFunc(fails)); 
-		// snd.removeEventListener('canplaythrough',function(){}); 	
-		// store it in the Map
-		//s.set(tone_freqs[ii],snd);
-		//let snd = await getSnd(audioCtx, name1);
-		//storeSnd(audioCtx, name1, tone_freqs[ii]);
-
-			// .then(sndBuffer => {
-			// 	//s.set(tone_freqs[ii],sndBuffer);
-			// 	s.push(sndBuffer);
-			// 	//snd = sndBuffer;
-			// 	isPreLoad();
-			// });
-		//sndPromise.then(snd => {s.set(tone_freqs[ii],snd)});
-		// s[ii]= new Audio(name1);
-		// s[ii].addEventListener('canplaythrough', isPreLoad); 
-		// s[ii].addEventListener('error', failFunc(fails)); 
-		// s[ii].removeEventListener('canplaythrough',function(){}); 		
+		// Load each sound into a buffer
+		storeSnd(audioCtx, name1, tone_freqs[ii]);		
 	}
-	
-	// Wait until all of the promises have been fulfilled before storing them
-	Promise.all(p).then((values) => {
-		for (var ii=0;ii<tone_freqs.length;ii++) {
-			s.set(tone_freqs[ii],p[ii]);
-			// remove the loading text
-			$('.loading').hide();
-		}
-	})
 }
 
 // =================================
@@ -109,9 +78,6 @@ function isPreLoad() {
 	if (preLoaded==numToLoad) {
 		//s2=s1;
 		$('.loading').hide(); 
-		// $("#progressbarPre").progressbar( "destroy" ); 
-		// $("#progressbarPre").hide();
-		//$('#next1').show();$('#headphones').show();$('#instHeadphones').show();
 	}
 }
 
@@ -123,16 +89,8 @@ async function getSnd(audioContext, filepath) {
 	return sndBuffer;
 }
 
-function storeSnd(audioContext, filepath, tone_freq) {
-	getSnd(audioContext, filepath)
-		.then(function(sndBuffer, tone_freq) {
-			s.set(tone_freq, sndBuffer);
-			isPreLoad();
-		});
+async function storeSnd(audioContext, filepath, tone_freq) {
+	const snd = await getSnd(audioContext, filepath);
+	s.set(tone_freq, snd);
+	isPreLoad();
 }
-
-// async function storeSnd(audioContext, filepath, tone_freq) {
-// 	const snd = await getSnd(audioContext, filepath);
-// 	s.set(tone_freq, snd);
-// 	isPreLoad();
-// }

@@ -20,14 +20,14 @@
 <div id="inst1" class="inst">
 <p><strong>In our lab we study auditory perception. You are now going to participate in a key task of our lab!</strong></p>
 <p>In this experiment you will hear two tones (beeps) on each trial.</p>
-<p>Your task is to respond if the pitch from the first to the second tone increases or decreases.</p>
+<p>Your task is to judge if the first or the second tone has a higher pitch.</p>
 </div>
 <input type="button" id="next2" class = "passButtons" value="Next"  />
 
 <!-- demo -->
 <div id="demo" class="inst">
 <p>What do I mean by "high" and "low" pitch? </p>
- <p>Lets get a feeling of "higher" and "lower" tones by pressing on these squares</p>
+ <p>Let's get a feeling of "higher" and "lower" tones by pressing on these squares</p>
  <p>The tones <strong>increase</strong> in pitch from left to right - try it!</p>
  <p>Can you hear all of the tones? If not, make sure your headphones are connected,</p>
  <p>and set the volume so that you can comfortably hear all of them.</p>
@@ -47,7 +47,7 @@
 <div id="inst2" class="inst">
 <p>The task:</p>
 <p>On each trial, two tones will be played consecutively: tone 1 --> tone 2</p>
-<p>Your task: Which of the two tones had the higher pitch? </p>
+<p>Your task: <i>Which of the two tones had the higher pitch?</i> </p>
 <p><strong>If the first tone had a higher pitch, press 1. Otherwise press 2.</strong></p>
 <p>We will begin with a short training session.</p>
 </div>
@@ -56,10 +56,11 @@
 <!-- instAdapt -->
 <div id="instAdapt" class="inst">
 <p>Onto the main experiment!</p>
-<p>The starting block has 60 trials that will last ~3 min.</p>
+<p>The starting block has 60 trials that will last about 3 minutes.</p>
 <p>Your task is the same as before:</p>
 <p><strong>If the first tone had a higher pitch, press 1. Otherwise press 2.</strong></p>
-<p><strong>Note:</strong> Trials will be harder now, but there is always a correct answer. If you don't know the answer - that's ok, just guess</p>
+<p><strong>Note:</strong> The trials will get very difficult, but there is always a correct answer.</p>
+<p>If you don't know the answer - that's ok, just guess</p>
 </div>
 <input type="button" id="nextAdapt" class = "passButtons" value="Next"  />
 
@@ -81,7 +82,7 @@
 <!-- inst3 -->
 <div id="instMain1" class="inst">
 <p>Good job!</p>
-<p>Next is the main task, which consists of 4 blocks of 80 trials each. It will take ~20 minutes in total.</p>
+<p>Next is the main task, which consists of 4 blocks of 80 trials each. It will take about 20 minutes in total.</p>
 <!--<p><strong>Note:</strong> Trials will be harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess </p>-->
 <!--<p>You can now also use the keyboard keys "1" and "2", the ones on the left of the keyboad (not the numped)<p>-->
 <!--<p>Lastly - this time there will be  <strong>NO</strong> feedback after each trial, but only after each block</p>-->
@@ -128,7 +129,7 @@
 <div  id="thanks" class="thanks">
 <p>Thats it!</p>
 <p>Many thanks for participating.</p>
-<p>M-turk password: hello newman.</p>
+<p>M-turk password: hey hey bokuto</p>
 <p>You may close this window now.</p>
 </div>
 
@@ -137,16 +138,17 @@
 
 <!-- Question -->
 <div  class="textQuestion">
-<p> Which of the two tones was higher? </p>
-<p id="counter"> </p>
+<p> Which of the two tones had a higher pitch? </p>
+<!--<p id="counter"> </p>-->
 </div>
 <input type="image" id="button1"  class = "Qbuttons" src="assets/img/1.png" alt="1">
 <input type="image" id="button2" class = "Qbuttons"src="assets/img/2.png" alt="2">
+<div id="counter"> </div>
 
 <!-- Loading -->
 <div  class="loading">
-<p>Loading....</p>
-<p>This may take a moment to complete, please be patient</p>
+<p>Loading the stimuli....</p>
+<!--<p>This may take a moment to complete, please be patient.</p>-->
 </div>
 
 
