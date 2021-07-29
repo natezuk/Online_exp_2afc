@@ -103,7 +103,7 @@ document.getElementById('next4').onclick = function() {
 document.getElementById('nextAdapt').onclick = function() {
 	$('#instAdapt').hide();$('#nextAdapt').hide();
 	// Show loading screen briefly
-	$('#loading').show();
+	$('.loading').show();
 	// Change the task id
 	task_id = 1;
 	/// Start by loading the first tones only
@@ -137,7 +137,7 @@ document.getElementById('nextMain1').onclick = function (){
 	$('#nextMain1').hide();$('#instMain1').hide();
 // ================= Sampling initialization===================
 	//Show loading screen briefly
-	$('#loading').show();
+	$('.loading').show();
 	// Change the task id
 	task_id = 2;
 	loadTones([low_freq_range[0],low_freq_range[0]*4],smt_diff_touse,nTrials); // Vincent and Itay

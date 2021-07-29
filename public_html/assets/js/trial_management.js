@@ -20,13 +20,13 @@ var trainCorrect=0;
 // ====================
 // ******* Task! ******* 
 // =====================
-var nTrials = 160; //300 //160
+var nTrials = 40; //300 //160
 	// number of trials per 2 blocks
 var nTrainingTrials = 5;
-var nAdaptTrials = 60; //60
+var nAdaptTrials = 20; //60
 var trial=0;
 var block=0;
-var pauseTime=80; //100 //80
+var pauseTime=20; //100 //80
 	// number of trials before the break (in between blocks)
 var breaks=0;
 
@@ -123,7 +123,7 @@ function startTask(){
 		if (task_id==2) { // if it's the second task, there are 2 more blocks
 			// Save the data
 			save_data();
-			$('#instMain2').show();$('#nextMain2').show();$('.textQuestion').hide();
+			$('#instMain2').show();$('#nextMain2').show();$('.textQuestion').hide();$('#counter').hide();
 		} else {
 			save_data();
 			finish(); // show a finish screen for the block
@@ -145,7 +145,7 @@ function startTask(){
 
 function callTimeout(time,trial){ 
 	setTimeout(function () {
-		$('.Qbuttons').show();$('.textQuestion').show();
+		$('.Qbuttons').show();$('.textQuestion').show();$('#counter').show();
 		var writeTrials=(trial-pauseTime*breaks);
 		document.getElementById("counter").innerHTML = "Trial:  "+writeTrials+ "/" +pauseTime;
 	
@@ -225,7 +225,7 @@ function staircaseTask(){
 			smt_diff_touse[ii] = smt_scalings[ii]*JND;
 		}
 
-		$('#instMain1').show();$('#nextMain1').show();$('.textQuestion').hide();
+		$('#instMain1').show();$('#nextMain1').show();$('.textQuestion').hide();$('#counter').hide();
 	} else {
 		trial++;
 		// Display information about the trial
@@ -260,7 +260,7 @@ function staircaseTask(){
 // Feedback and next trial for staircaseTask
 function callTimeoutAdapt(time,trial){ 
 	setTimeout(function () {
-		$('.Qbuttons').show();$('.textQuestion').show();
+		$('.Qbuttons').show();$('.textQuestion').show();$('#counter').show();
 		var writeTrials=trial;
 		document.getElementById("counter").innerHTML = "Trial:  "+writeTrials+ "/" +nAdaptTrials;
 	
@@ -342,7 +342,7 @@ function pressButton(){
 }
 
 function doBreak(){
-	$('.Qbuttons').hide();$('.textQuestion').hide();$('.feedback').hide(); // hide linking to the next page
+	$('.Qbuttons').hide();$('.textQuestion').hide();$('.feedback').hide();$('#counter').hide(); // hide linking to the next page
 	// if (breaks==(nTrials/pauseTime-2)){
 	// 	$('#break2').show();
 	// } else if (breaks==(nTrials/pauseTime-1)) {
