@@ -20,13 +20,13 @@ var trainCorrect=0;
 // ====================
 // ******* Task! ******* 
 // =====================
-var nTrials = 40; //300 //160
+var nTrials = 160; //300 //160
 	// number of trials per 2 blocks
 var nTrainingTrials = 5;
-var nAdaptTrials = 20; //60
+var nAdaptTrials = 60; //60
 var trial=0;
 var block=0;
-var pauseTime=20; //100 //80
+var pauseTime=80; //100 //80
 	// number of trials before the break (in between blocks)
 var breaks=0;
 
