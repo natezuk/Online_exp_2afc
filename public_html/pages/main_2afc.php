@@ -10,6 +10,7 @@
 <p>Please make sure you have your headphones set up and on you.</p>
 <p>IMPORTANT: If you do not have a set of headphones, please do not proceed with the experiment</p>
 <p>Press next to continue. To exit, simply close the tab</p>
+<p>WARNING: Refreshing the browser will restart the experiment.</p>
 </div>
 <input type="button" id="next1" class = "passButtons" value="Next"  />
 

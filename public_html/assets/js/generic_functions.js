@@ -258,7 +258,7 @@ function adapt(acc) {
 // Function to calculate the JND
 function calculate_jnd(smt_set) {
 	/// Find the first reversal
-	var ii = 0;
+	var ii = 1;
 	while (smt_set[ii]<=smt_set[ii-1]) {
 		// iterate through each trial as long as smt is <= the previous trial
 		ii++;
