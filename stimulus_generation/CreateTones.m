@@ -3,7 +3,9 @@
 
 addpath('C:\Users\natha\Documents\MATLAB\mp3readwrite\');
 
-frq = 150:0.5:5100; % set of stimulus frequencies (in Hz)
+frq = 100:0.5:6400; % set of stimulus frequencies (in Hz)
+    % (1-8-2021) Increased range of stimulus frequencies so max fdiff is 1
+    % octave
 % frq = 150:50:5100;
 Fs = 44100; % sampling rate of the stimuli (in Hz)
 tone_dur = 100; % duration of the tone (in ms)
@@ -17,7 +19,7 @@ for n = 1:length(frq)
     % Apply the ramp
     x = apply_ramps(x,ramp_time,Fs);
     % Save the audio
-    snd_fl = sprintf('%d.flac',frq(n)*2); % save at 2x the actual frequency,
+    snd_fl = sprintf('%d.wav',frq(n)*2); % save at 2x the actual frequency,
         % so it can be saved as an integer value
         % (22-7-2021) Changed to mp4, might have better browser
         % compatability

@@ -220,6 +220,8 @@ function staircaseTask(){
 		save_data();
 		// Calculate the JND at the end
 		JND = calculate_jnd(smt_set);
+		// Limit JND to at most 6 semitones
+		if (JND > 6) { JND = 6; }
 		// Calculate the semitone differences to use in the main block
 		for (var ii = 0; ii<smt_scalings.length; ii++) {
 			smt_diff_touse[ii] = smt_scalings[ii]*JND;
@@ -229,9 +231,9 @@ function staircaseTask(){
 	} else {
 		trial++;
 		// Display information about the trial
-		console.log('trial');
-		console.log(trial);
-		console.log(smt_set[trial-1]); // display the frequency difference for this trial
+		// console.log('trial');
+		// console.log(trial);
+		// console.log(smt_set[trial-1]); // display the frequency difference for this trial
 		// Calculate and load s2
 		if (Math.random()>0.5) {
 			// s2>s1
