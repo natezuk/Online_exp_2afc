@@ -1,7 +1,7 @@
 // ======
 // Experiment IDs
 // ======
-var exp_id = 1;
+var exp_id = 2; // experiment version 2
 var task_id = 0; // task_id
 
 // ======
@@ -20,8 +20,9 @@ var trainCorrect=0;
 // ====================
 // ******* Task! ******* 
 // =====================
-var nTrials = 160; //300 //160
+var nTrials = 240; //300 //160
 	// number of trials per 2 blocks
+	// changed to 240 for 3 blocks (8-8-2021)
 var nTrainingTrials = 5;
 var nAdaptTrials = 60; //60
 var trial=0;

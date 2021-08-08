@@ -28,7 +28,7 @@
 <!-- demo -->
 <div id="demo" class="inst">
 <p>What do I mean by "high" and "low" pitch? </p>
- <p>Let's get a feeling of "higher" and "lower" tones by pressing on these squares</p>
+ <p>Let's get a feeling of "higher" and "lower" tones by pressing on these squares.</p>
  <p>The tones <strong>increase</strong> in pitch from left to right - try it!</p>
  <p>Can you hear all of the tones? If not, make sure your headphones are connected,</p>
  <p>and set the volume so that you can comfortably hear all of them.</p>
@@ -83,7 +83,7 @@
 <!-- inst3 -->
 <div id="instMain1" class="inst">
 <p>Good job!</p>
-<p>Next is the main task, which consists of 4 blocks of 80 trials each. It will take about 20 minutes in total.</p>
+<p>Next is the main task, which consists of 6 blocks of 80 trials each. It will take about 25 minutes in total.</p>
 <!--<p><strong>Note:</strong> Trials will be harder now (there is always a correct answer), if you dont know the answer - that's ok, just guess </p>-->
 <!--<p>You can now also use the keyboard keys "1" and "2", the ones on the left of the keyboad (not the numped)<p>-->
 <!--<p>Lastly - this time there will be  <strong>NO</strong> feedback after each trial, but only after each block</p>-->
@@ -92,7 +92,7 @@
 
 <div id="instMain2" class="inst">
 <p>Good job!</p>
-<p>You have two more blocks to go. The trials in these blocks will be a little different.</p>
+<p>You have three more blocks to go. The trials in these blocks will be a little different.</p>
 <!--<p>Lastly - this time there will be  <strong>NO</strong> feedback after each trial, but only after each block</p>-->
 </div>
 <input type="button" id="nextMain2" class = "passButtons" value="Next" />
